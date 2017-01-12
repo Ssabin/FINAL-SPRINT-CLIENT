@@ -13,8 +13,8 @@ export default  {
       if( this.errors.any() ) return;
 
       authService.signup(user).then(res => {
-        this.$store.commit(SIGN_IN);
-        this.$router.push({ name: 'shop' });
+        this.$store.commit(SIGN_IN , user);
+        this.$router.push({ name: 'home' });
       });
     }
   }
