@@ -52,6 +52,12 @@ const actions = {
     return new Promise(resolve => {
       resolve({msg: 'Added meal successful'});  
     })
+  },
+  updateSettings( _ , settings){
+    //todo update db
+    return new Promise(resolve => {
+      resolve({msg: 'Changed settings successful'});  
+    })
   }
 };
 

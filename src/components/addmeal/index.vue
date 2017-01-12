@@ -113,24 +113,7 @@ export default{
 }
 </script>
 
-<style>
-.border{border:solid 1px red;}
-.form-control{height: inherit}
-</style>
-
 <style scoped>
-.add_meal{
-    border: solid 1px lightgrey;
-    border-radius: 7px;
-    overflow: hidden;
-    padding: 20px;
-    width: 80%;
-    margin: 0 auto;
-    text-align: center;
-    background: #c8fdce;
-    box-shadow: 1px 1px 5px grey;
-}
-
 .record_food{
     display: inline-block;
     /*overflow: hidden;*/
