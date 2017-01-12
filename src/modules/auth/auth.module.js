@@ -8,41 +8,42 @@ const state = {
 };
 
 const mutations = {
-  [SIGN_IN]( state, user ) {
+  [SIGN_IN](state, user) {
     state.isLoggedIn = true;
     state.user = user;
   },
-  [SIGN_OUT]( state ) {
+  [SIGN_OUT](state) {
     state.isLoggedIn = false;
   },
-  latestMeals(state , payload){
+  latestMeals(state, payload) {
     state.userLatestMeals = payload;
   }
 }
 
 const actions = {
-  getLatestMeals({commit}){
+  getLatestMeals({commit}) {
     //TODO get from server
-    let latestMeals = [
-    {
-      foods: ['meat','bread'],
-      time: 123123123,
-      _id: 123123,
-      userId: 1
-    },
-    {
-      foods: ['Milk','nuts'],
-      time: 124124124,
-      _id: 123123,
-      userId: 1
-    }
-  ];
+    let latestMeals =
+      [
+        {
+          foods: ['meat', 'bread'],
+          time: 123123123,
+          _id: 123123,
+          userId: 1
+        },
+        {
+          foods: ['Milk', 'nuts'],
+          time: 124124124,
+          _id: 123123,
+          userId: 1
+        }
+      ];
 
-  commit('latestMeals' , latestMeals);
+    commit('latestMeals', latestMeals);
 
   },
 
-  postMeal( _ , foods){
+  postMeal(_, foods) {
     const meal = {
       foods,
       time: Date.now(),
@@ -50,13 +51,13 @@ const actions = {
     }
     //TODO: get userId from localStorage
     return new Promise(resolve => {
-      resolve({msg: 'Added meal successful'});  
+      resolve({ msg: 'Added meal successful' });
     })
   },
-  updateSettings( _ , settings){
+  updateSettings(_, settings) {
     //todo update db
     return new Promise(resolve => {
-      resolve({msg: 'Changed settings successful'});  
+      resolve({ msg: 'Changed settings successful' });
     })
   }
 };
