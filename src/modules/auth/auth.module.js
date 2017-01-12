@@ -8,7 +8,6 @@ const state = {
 
 const mutations = {
   [SIGN_IN]( state, user ) {
-    console.log('mutate user' , user)
     state.isLoggedIn = true;
     state.user = user;
   },
@@ -17,11 +16,26 @@ const mutations = {
   }
 }
 
-const actions = {};
+const actions = {
+  postMeal( _ , foods){
+    const meal = {
+      foods,
+      time: Date.now(),
+      userId: 1
+    }
+    //TODO: get userId from localStorage
+    return new Promise(resolve => {
+      resolve({msg: 'Added meal successful'});  
+    })
+  }
+};
+
 const getters = {
   isLoggedIn: state => state.isLoggedIn,
   user: state => state.user
 };
+
+
 
 export default {
   state,
