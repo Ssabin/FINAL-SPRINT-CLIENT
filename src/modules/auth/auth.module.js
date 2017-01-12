@@ -3,6 +3,7 @@ export const SIGN_OUT = 'auth/SIGN_OUT';
 
 const state = {
   isLoggedIn: !!localStorage.getItem('token'),
+  // enteredFirstMeal: !!localStorage.getItem('firstMeal'),
   user: JSON.parse(localStorage.getItem('user')),
   userLatestMeals: []
 };
@@ -65,8 +66,9 @@ const actions = {
 
 const getters = {
   isLoggedIn: state => state.isLoggedIn,
+  enteredFirstMeal: state => state.enteredFirstMeal,
   user: state => state.user,
-  userLatestMeals: state => state.userLatestMeals
+  // userLatestMeals: state => state.userLatestMeals
 };
 
 
