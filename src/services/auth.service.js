@@ -7,32 +7,28 @@ import Vue from 'vue';
  * @returns {Promise}
  */
 function signin( {email,password} ) {
-  return Vue.http.post('http://localhost:3003/login', {username: email, pass: password} )
-    .then(res => res.json())
-    .then(({token, user}) => {
-      console.log('Signedin user:', user);
-      setSession(token, user);
-      return user;
-    })
-
-
+  // return Vue.http.post('http://localhost:3003/login', {username: email, pass: password} )
+  //   .then(res => res.json())
+  //   .then(({token, user}) => {
+  //     console.log('Signedin user:', user);
+  //     setSession(token, user);
+  //     return user;
+  //   })
+    return new Promise(( resolve, reject ) => {
+    if( password === '123456' ) {
+      const token = 'JWT';
+      resolve({
+        token
+      });
+      let user = {email,password};
+      setSession(token ,user);
+    } else {
+      reject({
+        error: 'Email/Password not valid'
+      });
+    }
+  });
 }
-// function signinDummy( { email, password } ) {
-//   return new Promise(( resolve, reject ) => {
-//     if( password === '123456' ) {
-//       const token = 'JWT';
-//       resolve({
-//         token
-//       });
-//       setSession(token);
-//     } else {
-//       reject({
-//         error: 'Email/Password not valid'
-//       });
-//     }
-//   });
-// }
-
 
 /**
  *
@@ -45,7 +41,8 @@ function signup( { email, password } ) {
     resolve({
       token
     });
-    setSession(token);
+    let user = {email , password};
+    setSession(token , user);
   });
 }
 
