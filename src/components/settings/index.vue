@@ -30,16 +30,6 @@
                 </div>
             </div>
             
-            <!--<div class="input-group">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" 
-                            type="button">Insert</button>
-                </span>
-            </div>
-            <br />-->
-            <!--<div class="confirm_food"><i class="fa fa-check fa-2x" 
-                aria-hidden="true"></i></div>
-            -->
         </div>
         
         <br /><br /><br /><br />
@@ -103,7 +93,12 @@ h4{
     color: white;
     font-weight: bold;  
 
+}    
+
+.lang_choose:last-of-type{
+    padding: 14px 0 0 10px;
 }
+
 .lang_choose:hover{
     background: #9bc9f1;
 }
