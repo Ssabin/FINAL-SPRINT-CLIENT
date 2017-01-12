@@ -7,7 +7,7 @@
         
         <br />
         <div class="add_meal">
-            <div class="record_food"><i class="fa fa-microphone fa-4x" aria-hidden="true"></i></div>
+            <div @click="toogleSpeechReco" class="record_food"><i class="fa fa-microphone fa-4x" aria-hidden="true"></i></div>
             
             <br /><br />
             <div class="input-group">
@@ -46,11 +46,14 @@ export default{
     data(){
         return {
             foods: [],
-            currFood: ''             
+            currFood: '',
+            recognition: null,
+            isRec: false
         }
     },
     methods: {
         addFood(){
+            if(this.currFood === '') return
             this.foods.push(this.currFood);
             this.currFood = '';
         },
@@ -60,10 +63,52 @@ export default{
                             console.log(res.msg)
                         });
             this.foods = [];
-        }
+            this.isRec = false;
+            this.recognition.stop();
+        },
+        toogleSpeechReco(){
+                if(this.isRec) this.recognition.stop();
+                else this.recognition.start();
+            }
     },
     components:{
         // AddMeal
+    },
+    mounted(){
+        if (!('webkitSpeechRecognition' in window)) {
+            console.log('webkitSpeechRecognition not supported');
+        } else {
+            this.recognition = new webkitSpeechRecognition();
+            // this.recognition.continuous = true;
+            this.recognition.lang = 'en-us';
+            this.recognition.interimResults = true;
+
+        this.recognition.onstart = () => {
+                this.isRec = true;
+            }
+            this.recognition.onresult = (event) => {
+                let allText = '';
+                for(let currRes in event.results){
+                    const res = event.results[currRes][0];
+                    if(res){
+                        console.log('script', res.transcript)
+                        allText += ' ' + res.transcript;
+                    }
+                }
+                console.log('allText', allText);
+                this.currFood = allText;
+                //now you can show the results
+            }
+            this.recognition.onerror = (event) => {
+                console.log('onerror', event);
+                this.isRec = false;
+            }
+            this.recognition.onend = () => { 
+                console.log('done record')
+                this.addFood();
+                if(this.isRec) this.recognition.start();
+            }
+        }
     }
 }
 </script>
