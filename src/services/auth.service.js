@@ -22,14 +22,20 @@ function signin( {email,password} ) {
  * @param password
  */
 function signup( { email, password } ) {
-  const token = 'JWT';
-  return new Promise(resolve => {
-    resolve({
-      token
-    });
-    let user = {email , password};
-    setSession(token , user);
-  });
+  const userToRegister = {
+    email,
+    password,
+    imgUrl : "jj",
+    settings : {
+        pushTimer : 1,
+        lang : "en"
+    }
+  }
+  return Vue.http.post('http://localhost:3003/data/user', userToRegister )
+                 .then( res => res.json())
+                 .then( user => {
+                   return user;
+                 })
 }
 
 /**
