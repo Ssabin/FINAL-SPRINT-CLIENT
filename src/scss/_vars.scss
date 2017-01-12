@@ -6,7 +6,9 @@ $mobile-breakpoint: 642px;
   --container-width: $container-width;
   --inner-container-width: 900px;
   /* Fonts */
-  --primary-font: Playfair;
+  /* default BootS font - overwrite the scss font var - doesnt work */
+  --primary-font: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  /* --primary-font: Playfair; */
   --secondary-font: Ubuntu;
   /* Colors */
   --main-color: #626262;
