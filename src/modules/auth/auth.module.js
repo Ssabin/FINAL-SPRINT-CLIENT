@@ -3,7 +3,8 @@ export const SIGN_OUT = 'auth/SIGN_OUT';
 
 const state = {
   isLoggedIn: !!localStorage.getItem('token'),
-  user: JSON.parse(localStorage.getItem('user'))
+  user: JSON.parse(localStorage.getItem('user')),
+  userLatestMeals: []
 };
 
 const mutations = {
@@ -13,10 +14,34 @@ const mutations = {
   },
   [SIGN_OUT]( state ) {
     state.isLoggedIn = false;
+  },
+  latestMeals(state , payload){
+    state.userLatestMeals = payload;
   }
 }
 
 const actions = {
+  getLatestMeals({commit}){
+    //TODO get from server
+    let latestMeals = [
+    {
+      foods: ['meat','bread'],
+      time: 123123123,
+      _id: 123123,
+      userId: 1
+    },
+    {
+      foods: ['Milk','nuts'],
+      time: 124124124,
+      _id: 123123,
+      userId: 1
+    }
+  ];
+
+  commit('latestMeals' , latestMeals);
+
+  },
+
   postMeal( _ , foods){
     const meal = {
       foods,
@@ -36,9 +61,11 @@ const actions = {
   }
 };
 
+
 const getters = {
   isLoggedIn: state => state.isLoggedIn,
-  user: state => state.user
+  user: state => state.user,
+  userLatestMeals: state => state.userLatestMeals
 };
 
 
