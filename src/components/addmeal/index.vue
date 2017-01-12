@@ -1,9 +1,9 @@
 <template>
     <section>
         Add a Meal
-
-        <br /> {{isLoggedIn}} , {{enteredFirstMeal}}
         <br />
+        <br />
+        {{enteredFirstMeal}} , {{localFirstMeal}}
         <div class="frame_feature">
             <div @click="toogleSpeechReco" class="record_food"><i class="fa fa-microphone fa-4x" aria-hidden="true"></i></div>
 
@@ -23,10 +23,7 @@
         <!--
             TODO:
                 //Record button
-                input v-model with the record results
-                add meal item + button
-                confirm meal item V button
-                show meal items list
+                X on food items                
                 bonus:
                 show common meal items for user in this hours
         -->
@@ -44,16 +41,20 @@
             return {
                 foods: [],
                 currFood: '',
+                localFirstMeal: false, //localStorage isnt really computed
                 recognition: null,
                 isRec: false
             }
         },
         computed: {
-            ...mapGetters(['isLoggedIn' , 'enteredFirstMeal'])
+            enteredFirstMeal(){
+                return !!localStorage.getItem('firstMeal');
+            },
+            ...mapGetters(['isLoggedIn'])
         },
         methods: {
             addFood() {
-                if(this.enteredFirstMeal && !this.isLoggedIn){
+                if((this.enteredFirstMeal || this.localFirstMeal) && !this.isLoggedIn){
                     alert('GO SIGN UP!');
                     this.$router.push('/signup');
                 }
@@ -67,9 +68,13 @@
                         .then(res => {
                             console.log(res.msg)
                         });
-                }else if(!this.enteredFirstMeal){
+                }else if(!this.enteredFirstMeal || !this.localFirstMeal){
                     localStorage.setItem('firstMeal' , this.foods);
+                }else{
+                    alert('GO SIGN UP!');
+                    this.$router.push('/signup');
                 }
+                this.localFirstMeal = true;
                 this.foods = [];
                 this.isRec = false;
                 this.recognition.stop();

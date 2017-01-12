@@ -11,6 +11,7 @@ function signin( {email,password} ) {
     .then(res => res.json())
     .then(({token, user}) => {
       console.log('Signedin user:', user);
+      localStorage.removeItem('firstMeal');
       setSession(token, user);
       return user;
     })
