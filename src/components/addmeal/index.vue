@@ -6,7 +6,7 @@
         {{msg}}
         
         <br />
-        <div class="add_meal">
+        <div class="frame_feature">
             <div @click="toogleSpeechReco" class="record_food"><i class="fa fa-microphone fa-4x" aria-hidden="true"></i></div>
             
             <br /><br />
@@ -80,7 +80,7 @@ export default{
         } else {
             this.recognition = new webkitSpeechRecognition();
             // this.recognition.continuous = true;
-            this.recognition.lang = 'en-us';
+            this.recognition.lang = 'en-GB';
             this.recognition.interimResults = true;
 
         this.recognition.onstart = () => {
