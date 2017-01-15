@@ -11,7 +11,7 @@ export default  {
     signup( user ) {
       this.$validator.validateAll();
       if( this.errors.any() ) return;
-
+      user.email = user.email.toLowerCase()
       authService.signup(user).then(res => {
         this.$store.commit(SIGN_IN , user);
         this.$router.push({ name: 'home' });
