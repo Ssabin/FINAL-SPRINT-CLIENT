@@ -39,16 +39,15 @@ const actions = {
         })
   },
 
-  postMeal(_, foods) {
+  postMeal({state}, foods) {
     const meal = {
       foods,
       time: Date.now(),
-      userId: 1
+      userId: state.user._id
     }
-    //TODO: get userId from localStorage
-    return new Promise(resolve => {
-      resolve({ msg: 'Added meal successful' });
-    })
+    Vue.http.post('http://localhost:3003/data/meal' , meal)
+            .then( res => res.json())
+            .then( meal => meal)
   },
   updateSettings(_, settings) {
     //todo update db

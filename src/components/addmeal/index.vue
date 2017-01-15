@@ -65,8 +65,8 @@
             submitMeal() {
                 if (this.isLoggedIn) {
                     this.$store.dispatch('postMeal', this.foods)
-                        .then(res => {
-                            console.log(res.msg)
+                        .then(_ => {
+                            console.log('Meal added successfully');
                         });
                 }else if(!this.enteredFirstMeal || !this.localFirstMeal){
                     localStorage.setItem('firstMeal' , this.foods);
