@@ -2,13 +2,9 @@ import authService from '../../services/auth.service';
 import {SIGN_IN, SIGN_OUT} from '../../modules/auth/auth.module';
 
 export default  {
-  mounted() {
-    // console.log(this.$router);
-    // console.log(this.$route);
-  },
   data   : () => {
     return {
-      user : { email: 'stam@stam.st', password: '123456' },
+      user : { email: '', password: '' },
       error: ""
     }
   },

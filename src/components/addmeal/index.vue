@@ -1,14 +1,12 @@
 <template>
     <section>
         Add a Meal
-
         <br />
-        {{msg}}
-        
         <br />
+        {{enteredFirstMeal}} , {{localFirstMeal}}
         <div class="frame_feature">
             <div @click="toogleSpeechReco" class="record_food"><i class="fa fa-microphone fa-4x" aria-hidden="true"></i></div>
-            
+
             <br /><br />
             <div class="input-group">
                 <input v-model="currFood" @keyup.enter="addFood" placeholder="Insert your food" class="form-control" />
@@ -19,21 +17,17 @@
             </div>
             <p><span v-for="food in foods">{{food}}, </span></p>
             <br />
-            <div @click="submitMeal" class="confirm_food"><i class="fa fa-check fa-2x" 
-                aria-hidden="true"></i></div>
-            
+            <div @click="submitMeal" class="confirm_food"><i class="fa fa-check fa-2x" aria-hidden="true"></i></div>
+
         </div>
         <!--
             TODO:
                 //Record button
-                input v-model with the record results
-                add meal item + button
-                confirm meal item V button
-                show meal items list
+                X on food items                
                 bonus:
                 show common meal items for user in this hours
         -->
-        
+
         <br /><br />
 
     </section>
@@ -41,76 +35,95 @@
 
 <script>
 
-// import AddMeal from '../addmeal'
-export default{
-    data(){
-        return {
-            foods: [],
-            currFood: '',
-            recognition: null,
-            isRec: false
-        }
-    },
-    methods: {
-        addFood(){
-            if(this.currFood === '') return
-            this.foods.push(this.currFood);
-            this.currFood = '';
+    import { mapGetters } from 'vuex';
+    export default {
+        data() {
+            return {
+                foods: [],
+                currFood: '',
+                localFirstMeal: false, //localStorage isnt really computed
+                recognition: null,
+                isRec: false
+            }
         },
-        submitMeal(){
-            this.$store.dispatch('postMeal' , this.foods)
-                        .then(res => {
-                            console.log(res.msg)
+        computed: {
+            enteredFirstMeal(){
+                return !!localStorage.getItem('firstMeal');
+            },
+            ...mapGetters(['isLoggedIn'])
+        },
+        methods: {
+            addFood() {
+                if((this.enteredFirstMeal || this.localFirstMeal) && !this.isLoggedIn){
+                    alert('GO SIGN UP!');
+                    this.$router.push('/signup');
+                }
+                if (this.currFood === '') return;
+                this.foods.push(this.currFood);
+                this.currFood = '';
+            },
+            submitMeal() {
+                if (this.isLoggedIn) {
+                    this.$store.dispatch('postMeal', this.foods)
+                        .then(_ => {
+                            console.log('Meal added successfully');
                         });
-            this.foods = [];
-            this.isRec = false;
-            this.recognition.stop();
-        },
-        toogleSpeechReco(){
-                if(this.isRec) this.recognition.stop();
+                }else if(!this.enteredFirstMeal || !this.localFirstMeal){
+                    localStorage.setItem('firstMeal' , this.foods);
+                }else{
+                    alert('GO SIGN UP!');
+                    this.$router.push('/signup');
+                }
+                this.localFirstMeal = true;
+                this.foods = [];
+                this.isRec = false;
+                this.recognition.stop();
+            },
+            toogleSpeechReco() {
+                if (this.isRec) this.recognition.stop();
                 else this.recognition.start();
             }
-    },
-    components:{
-        // AddMeal
-    },
-    mounted(){
-        if (!('webkitSpeechRecognition' in window)) {
-            console.log('webkitSpeechRecognition not supported');
-        } else {
-            this.recognition = new webkitSpeechRecognition();
-            // this.recognition.continuous = true;
-            this.recognition.lang = 'en-GB';
-            this.recognition.interimResults = true;
+        },
+        components: {
+            // AddMeal
+        },
+        mounted() {
+            if (!('webkitSpeechRecognition' in window)) {
+                console.log('webkitSpeechRecognition not supported');
+            } else {
+                this.recognition = new webkitSpeechRecognition();
+                // this.recognition.continuous = true;
+                this.recognition.lang = 'en-GB';
+                this.recognition.interimResults = true;
 
-        this.recognition.onstart = () => {
-                this.isRec = true;
-            }
-            this.recognition.onresult = (event) => {
-                let allText = '';
-                for(let currRes in event.results){
-                    const res = event.results[currRes][0];
-                    if(res){
-                        console.log('script', res.transcript)
-                        allText += ' ' + res.transcript;
-                    }
+                this.recognition.onstart = () => {
+                    this.isRec = true;
                 }
-                console.log('allText', allText);
-                this.currFood = allText;
-                //now you can show the results
-            }
-            this.recognition.onerror = (event) => {
-                console.log('onerror', event);
-                this.isRec = false;
-            }
-            this.recognition.onend = () => { 
-                console.log('done record')
-                this.addFood();
-                if(this.isRec) this.recognition.start();
+                this.recognition.onresult = (event) => {
+                    let allText = '';
+                    for (let currRes in event.results) {
+                        const res = event.results[currRes][0];
+                        if (res) {
+                            console.log('script', res.transcript)
+                            allText += ' ' + res.transcript;
+                        }
+                    }
+                    console.log('allText', allText);
+                    this.currFood = allText;
+                    //now you can show the results
+                }
+                this.recognition.onerror = (event) => {
+                    console.log('onerror', event);
+                    this.isRec = false;
+                }
+                this.recognition.onend = () => {
+                    console.log('done record')
+                    this.addFood();
+                    if (this.isRec) this.recognition.start();
+                }
             }
         }
     }
-}
 </script>
 
 <style scoped>
