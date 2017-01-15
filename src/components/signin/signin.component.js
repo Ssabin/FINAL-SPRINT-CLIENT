@@ -12,7 +12,7 @@ export default  {
     signin( user ) {
       this.$validator.validateAll();
       if( this.errors.any() ) return;
-
+      user.email = user.email.toLowerCase()
       authService.signin(user).then(res => {
         this.$store.commit(SIGN_IN, res);
         this.$router.go(-1);
