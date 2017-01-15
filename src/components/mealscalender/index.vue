@@ -1,33 +1,87 @@
-<template >
+<template>
     <section>
         <div v-for="meal in userLatestMeals">
-            <h2>Meal at {{meal.time}}</h2>
+            <h2>Meal at {{meal.start}}</h2>
             <p>You ate:</p>
             <ul>
-                <li v-for="food in meal.foods">{{food}}</li>
+                <li>{{meal.title}}</li>
             </ul>
+        </div>
+        <div class="calendar">
+
         </div>
     </section>
 </template>
 <script>
-    import {mapGetters} from 'vuex';
-    export default{
-        data(){
+    import { mapGetters } from 'vuex';
+    import $ from 'jquery'
+    import moment from 'moment';
+    import FullCalendar from 'fullcalendar';
+    import 'fullcalendar/dist/fullcalendar.min.css'
+    export default {
+        data() {
             return {
+                meals: [{
+                    id: "1",
+                    title: "Banana, Apple",
+                    start: moment(1484210059985).format(),
+                    end: moment(1484263059985).format(),
+                    // allDay: true
+                }]
             }
         },
-        computed:{
-            ...mapGetters(['userLatestMeals'])
+        computed: {
+            ...mapGetters(['userLatestMeals']),
+            filter() {
+                // console.log('hi')
+                let calendar = $('.calendar');
+                if (calendar.length) {
+                    return {
+                        start: $('.calendar').fullCalendar('getView').start._d.getTime(),
+                        end: $('.calendar').fullCalendar('getView').end._d.getTime()
+                    }
+                } else {
+                    return {
+                        start: 0,
+                        end: Infinity
+                    }
+                }
+            }
         },
-        created(){
-            this.$store.dispatch('getLatestMeals');
+        watch: {
+            userLatestMeals: function (meals) {
+                $('.calendar').fullCalendar({
+                    // put your options and callbacks here
+
+                    // hiddenDays: [  4, 5,6 ], //choose which days to hide
+                    // hiddenDays: [ 0, 1,2,3 ],
+                    defaultView: 'agendaWeek',
+                    header: { center: 'month, agendaWeek' }, // buttons for switching between views
+                    views: {
+                        month: { // name of view
+                            titleFormat: 'YYYY, MM, DD' // name of view
+                            // other view-specific options here
+                        },
+                        agendaWeek: {
+                            titleFormat: 'YYYY, MM, DD'
+                        }
+                    },
+                viewRender: (view, element) => {
+                        let filter = {
+                            start: $('.calendar').fullCalendar('getView').start._d.getTime(),
+                            end: $('.calendar').fullCalendar('getView').end._d.getTime()
+                        }
+                        this.$store.dispatch('getLatestMeals', filter)
+                    },
+                    events: this.userLatestMeals,
+                })
+            }
         },
-        components:{
+        created() {
+            this.$store.dispatch('getLatestMeals', this.filter)
         }
     }
 </script>
 <style scoped lang="scss">
     
 </style>
-
-
