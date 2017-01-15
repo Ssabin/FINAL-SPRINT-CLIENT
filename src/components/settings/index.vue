@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import authService from '../../services/auth.service';
 
 export default{
     data(){
@@ -54,56 +55,63 @@ export default{
             this.settings.lang = ev.target.innerText;
         },
         submitSettings(){
-            this.$store.dispatch('updateSettings' , this.settings)
-                        .then(res => {
-                            console.log(res.msg);
-                            this.$router.go(-1);
-                        });
+            //update the server and DB
+            authService.updateUserSettings(this.settings)
+            .then(res => {
+                //update the storage
+                this.$store.dispatch('updateSettings', res);
+                // this.$router.go(-1);
+            })
+            .catch(err => {
+                err.json().then(res => this.error = res.error);
+            })
         }
     },
     components:{
-        // AddMeal
+    },
+    mounted(){
+        // console.log('updateSettings from indexvue', updateSettings);
     }
 }
 </script>
 
 <style scoped>
-.lang_container{
-    margin: 20px 0;
-    text-align: left;
-    overflow: hidden;
-    width: 100%;
-}
+    .lang_container{
+        margin: 20px 0;
+        text-align: left;
+        overflow: hidden;
+        width: 100%;
+    }
 
-h4{
-    display: inline-block;
-}
-    
-.lang_choose{
-    display: inline-block;
-    /*overflow: hidden;*/
-    width: 50px;
-    height: 50px;
-    /*margin: auto;*/
-    padding: 14px;
-    border: solid 1px grey;
-    border-radius: 25px;
-    cursor: pointer;
-    background: #337ab7;
-    color: white;
-    font-weight: bold;  
+    h4{
+        display: inline-block;
+    }
+        
+    .lang_choose{
+        display: inline-block;
+        /*overflow: hidden;*/
+        width: 50px;
+        height: 50px;
+        /*margin: auto;*/
+        padding: 14px;
+        border: solid 1px grey;
+        border-radius: 25px;
+        cursor: pointer;
+        background: #337ab7;
+        color: white;
+        font-weight: bold;  
 
-}    
+    }    
 
-.lang_choose:last-of-type{
-    padding: 14px 0 0 10px;
-}
+    .lang_choose:last-of-type{
+        padding: 14px 0 0 10px;
+    }
 
-.lang_choose:hover{
-    background: #9bc9f1;
-}
+    .lang_choose:hover{
+        background: #9bc9f1;
+    }
 
-.submit_lang{
-    text-align: right;
-}
+    .submit_lang{
+        text-align: right;
+    }
 </style>

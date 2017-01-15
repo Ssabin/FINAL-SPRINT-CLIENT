@@ -2,12 +2,14 @@ import Vue from 'vue';
 
 export const SIGN_IN = 'auth/SIGN_IN';
 export const SIGN_OUT = 'auth/SIGN_OUT';
+export const UPDATE_USER_SETTINGS = 'auth_modules/UPDATE_USER_SETTINGS';
 
 const state = {
   isLoggedIn: !!localStorage.getItem('token'),
   // enteredFirstMeal: !!localStorage.getItem('firstMeal'),
   user: JSON.parse(localStorage.getItem('user')),
-  userLatestMeals: []
+  userLatestMeals: [],
+  settings: {'pushTimer': '1 hour', 'lang': 'en'}
 };
 
 const mutations = {
@@ -21,6 +23,11 @@ const mutations = {
   latestMeals(state, payload) {
     console.log(payload)    
     state.userLatestMeals = payload;
+  },
+  
+  [UPDATE_USER_SETTINGS](state, settings){
+    console.log('auth.modules.js: UPDATE_USER_SETTINGS mutations');
+    state.settings = settings;
   }
 }
 
@@ -37,6 +44,7 @@ const actions = {
           latestMeals = meals.meals;
           commit('latestMeals', latestMeals);
         })
+
   },
 
   postMeal({state}, foods) {
@@ -49,22 +57,20 @@ const actions = {
             .then( res => res.json())
             .then( meal => meal)
   },
-  updateSettings(_, settings) {
-    //todo update db
-    return new Promise(resolve => {
-      resolve({ msg: 'Changed settings successful' });
-    })
+  updateSettings( state , settings){
+    //update the state
+    state.commit(UPDATE_USER_SETTINGS, settings);      
+    // console.log('1: auth.modules.js updateSettings: settings', settings);  
+
   }
 };
-
 
 const getters = {
   isLoggedIn: state => state.isLoggedIn,
   enteredFirstMeal: state => state.enteredFirstMeal,
   user: state => state.user,
   userLatestMeals: state => state.userLatestMeals
-};
-
+}; 
 
 
 export default {
