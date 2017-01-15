@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 export const SIGN_IN = 'auth/SIGN_IN';
 export const SIGN_OUT = 'auth/SIGN_OUT';
 
@@ -17,31 +19,24 @@ const mutations = {
     state.isLoggedIn = false;
   },
   latestMeals(state, payload) {
+    console.log(payload)    
     state.userLatestMeals = payload;
   }
 }
 
 const actions = {
-  getLatestMeals({commit}) {
-    //TODO get from server
-    let latestMeals =
-      [
-        {
-          foods: ['meat', 'bread'],
-          time: 123123123,
-          _id: 123123,
-          userId: 1
-        },
-        {
-          foods: ['Milk', 'nuts'],
-          time: 124124124,
-          _id: 123123,
-          userId: 1
-        }
-      ];
-
-    commit('latestMeals', latestMeals);
-
+  getLatestMeals({state,commit}) {
+    //TODO get time from inputs
+    let latestMeals = [];
+      Vue.http.post('http://localhost:3003/usermeals' , {
+        "userId": state.user._id, 
+        "from": "1483221600000",
+	      "to": "1483826400000" })
+        .then(res => res.json())
+        .then(meals => {
+          latestMeals = meals.meals;
+          commit('latestMeals', latestMeals);
+        })
   },
 
   postMeal(_, foods) {
@@ -68,7 +63,7 @@ const getters = {
   isLoggedIn: state => state.isLoggedIn,
   enteredFirstMeal: state => state.enteredFirstMeal,
   user: state => state.user,
-  // userLatestMeals: state => state.userLatestMeals
+  userLatestMeals: state => state.userLatestMeals
 };
 
 
