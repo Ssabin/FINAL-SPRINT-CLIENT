@@ -7,27 +7,14 @@ import Vue from 'vue';
  * @returns {Promise}
  */
 function signin( {email,password} ) {
-  // return Vue.http.post('http://localhost:3003/login', {username: email, pass: password} )
-  //   .then(res => res.json())
-  //   .then(({token, user}) => {
-  //     console.log('Signedin user:', user);
-  //     setSession(token, user);
-  //     return user;
-  //   })
-    return new Promise(( resolve, reject ) => {
-    if( password === '123456' ) {
-      const token = 'JWT';
-      resolve({
-        token
-      });
-      let user = {email,password};
-      setSession(token ,user);
-    } else {
-      reject({
-        error: 'Email/Password not valid'
-      });
-    }
-  });
+  return Vue.http.post('http://localhost:3003/login', {email, password} )
+    .then(res => res.json())
+    .then(({token, user}) => {
+      console.log('Signedin user:', user);
+      localStorage.removeItem('firstMeal');
+      setSession(token, user);
+      return user;
+    })
 }
 
 /**
@@ -36,14 +23,20 @@ function signin( {email,password} ) {
  * @param password
  */
 function signup( { email, password } ) {
-  const token = 'JWT';
-  return new Promise(resolve => {
-    resolve({
-      token
-    });
-    let user = {email , password};
-    setSession(token , user);
-  });
+  const userToRegister = {
+    email,
+    password,
+    imgUrl : "jj",
+    settings : {
+        pushTimer : 1,
+        lang : "en"
+    }
+  }
+  return Vue.http.post('http://localhost:3003/data/user', userToRegister )
+                 .then( res => res.json())
+                 .then( user => {
+                   return user;
+                 })
 }
 
 /**
@@ -83,7 +76,10 @@ function protectRoute( next ) {
   }
 }
 
- function updateUserSettings( settings ) {
+/**
+ * @param email, password
+ */
+function updateUserSettings( settings ) {
   //get user id
   console.log('auth.service.js updateUserSettings: ', settings);
   return new Promise(resolve => {
@@ -99,7 +95,8 @@ function protectRoute( next ) {
    //   setSession(token, user);
    //   return user;
    // })
- }
+}
+
 
 export default {
   signin,

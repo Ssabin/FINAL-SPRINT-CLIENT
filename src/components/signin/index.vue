@@ -4,10 +4,10 @@
 
 <!--
     TODO:
-        v-validate
-        Email input
-        password input
-        submit button
+        v-validate V
+        Email input V
+        password input V
+        submit button V
         bonus:
             Facebook login
             Google login

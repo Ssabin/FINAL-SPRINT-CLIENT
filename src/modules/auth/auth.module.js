@@ -1,73 +1,76 @@
+import Vue from 'vue';
+
 export const SIGN_IN = 'auth/SIGN_IN';
 export const SIGN_OUT = 'auth/SIGN_OUT';
+export const UPDATE_USER_SETTINGS = 'auth_modules/UPDATE_USER_SETTINGS';
 
 const state = {
   isLoggedIn: !!localStorage.getItem('token'),
+  // enteredFirstMeal: !!localStorage.getItem('firstMeal'),
   user: JSON.parse(localStorage.getItem('user')),
-  userLatestMeals: []
+  userLatestMeals: [],
+  settings: {'pushTimer': '1 hour', 'lang': 'en'}
 };
 
 const mutations = {
-  [SIGN_IN]( state, user ) {
+  [SIGN_IN](state, user) {
     state.isLoggedIn = true;
     state.user = user;
   },
-  [SIGN_OUT]( state ) {
+  [SIGN_OUT](state) {
     state.isLoggedIn = false;
   },
-  latestMeals(state , payload){
+  latestMeals(state, payload) {
+    console.log(payload)    
     state.userLatestMeals = payload;
+  },
+  
+  [UPDATE_USER_SETTINGS](state, settings){
+    console.log('auth.modules.js: UPDATE_USER_SETTINGS mutations');
+    state.settings = settings;
   }
 }
 
 const actions = {
-  getLatestMeals({commit}){
-    //TODO get from server
-    let latestMeals = [
-    {
-      foods: ['meat','bread'],
-      time: 123123123,
-      _id: 123123,
-      userId: 1
-    },
-    {
-      foods: ['Milk','nuts'],
-      time: 124124124,
-      _id: 123123,
-      userId: 1
-    }
-  ];
-
-  commit('latestMeals' , latestMeals);
+  getLatestMeals({state,commit}) {
+    //TODO get time from inputs
+    let latestMeals = [];
+      Vue.http.post('http://localhost:3003/usermeals' , {
+        "userId": state.user._id, 
+        "from": "1483221600000",
+	      "to": "1483826400000" })
+        .then(res => res.json())
+        .then(meals => {
+          latestMeals = meals.meals;
+          commit('latestMeals', latestMeals);
+        })
 
   },
 
-  postMeal( _ , foods){
+  postMeal({state}, foods) {
     const meal = {
       foods,
       time: Date.now(),
-      userId: 1
+      userId: state.user._id
     }
-    //TODO: get userId from localStorage
-    return new Promise(resolve => {
-      resolve({msg: 'Added meal successful'});  
-    })
+    Vue.http.post('http://localhost:3003/data/meal' , meal)
+            .then( res => res.json())
+            .then( meal => meal)
   },
-  updateSettings( _ , settings){
-    //todo update db
-    return new Promise(resolve => {
-      resolve({msg: 'Changed settings successful'});  
-    })
+  updateSettings( state , settings){
+    //update the state
+    state.commit(UPDATE_USER_SETTINGS, settings);      
+    // console.log('1: auth.modules.js updateSettings: settings', settings);  
+
   }
 };
 
-
 const getters = {
   isLoggedIn: state => state.isLoggedIn,
+  enteredFirstMeal: state => state.enteredFirstMeal,
   user: state => state.user,
   userLatestMeals: state => state.userLatestMeals
-};
-
+}; 
 
 
 export default {
