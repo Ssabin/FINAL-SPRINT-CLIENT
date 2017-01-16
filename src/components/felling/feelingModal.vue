@@ -1,28 +1,28 @@
 <template>
   <section>
-    <div v-if="isShowModal">
-      <transition name =" fade">
-        <div class="modal-mask">
+    <transition name="fade">
+      <div v-if="isShowModal">
+        <div class="modal-mask" @click="isShowModal = false">
           <div class="modal-wrapper">
             <div class="modal-container">
               <div class="modal-header">
-                Hi
+                Hi , how do you feel?
               </div>
               <div class="modal-body">
-                How do you feel?
+
               </div>
-              <div class="modal-footer">
-                default footer
-                <button class="modal-default-button" @click="isShowModal = false">OK</button>
-              </div>
+              <!--<div class="modal-footer">
+              default footer
+              <button class="modal-default-button">OK</button>
+            </div>-->
             </div>
           </div>
         </div>
-      </transition>
-    </div>
+      </div>
+    </transition>
 
     <div>
-      <button @click="isShowModal = true">Show Modal</button>
+      <button @click="isShowModal = !isShowModal">Show Modal</button>
     </div>
   </section>
 </template>
@@ -30,7 +30,8 @@
   export default {
     data() {
       return {
-        isShowModal: false
+        isShowModal: false,
+        isShowModal1: false
       }
     },
     components: {
@@ -80,9 +81,9 @@
   float: right;
 }
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 1s ease;
+  transition: opacity 0.5s ease;
 }
-.fade-enter, .fade-leave-to  .fade-leave-active   {
+.fade-enter, .fade-leave-to  {
   opacity: 0;
 }
 
