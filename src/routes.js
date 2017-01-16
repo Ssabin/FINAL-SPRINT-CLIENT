@@ -7,6 +7,7 @@ import MyMeals from './components/mymeals'
 import GlobalStatistics from './components/globalstatistics'
 import UserStatistics from './components/userstatistics'
 import Settings from './components/settings'
+import Feelings from './components/felling/feeling'
 
 import Admin from './components/admin/admin';
 
@@ -48,6 +49,11 @@ const routes = [{
     path     :'/settings',
     name     :'settings',
     component: Settings
+  },
+  {
+    path     :'/feelings',
+    name     :'feelings',
+    component: Feelings
   },
   
   { path: '*', redirect: { name: 'home' } }];

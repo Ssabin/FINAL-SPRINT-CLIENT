@@ -25,6 +25,9 @@
             <li v-if="this.isLoggedIn">    
                 <a href="" @click="signOut">Sign out</a>
             </li>
+            <li v-if="!this.isLoggedIn || true">
+                <router-link to="/feelings">User Fells</router-link>
+            </li>
         </ul>
     </section>
 </template>
