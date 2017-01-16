@@ -15,7 +15,11 @@
                             type="button">Insert</button>
                 </span>
             </div>
-            <p><span v-for="food in foods">{{food}}, </span></p>
+            <p class="p_foods">
+                <span class="span_foods" v-for="(food, index) in foods">
+                    <i @click="deleteFood(index)" title="Delete this food" class="fa fa-times-circle" aria-hidden="true"></i> {{food}},&nbsp;&nbsp;
+                </span>
+            </p>
             <br />
             <div @click="submitMeal" class="confirm_food"><i class="fa fa-check fa-2x" aria-hidden="true"></i></div>
 
@@ -82,6 +86,9 @@
             toogleSpeechReco() {
                 if (this.isRec) this.recognition.stop();
                 else this.recognition.start();
+            },
+            deleteFood(idx){
+                this.foods.splice(idx, 1);
             }
         },
         components: {
@@ -161,4 +168,17 @@
     background: #9bc9f1;
 }
 
+.fa-times-circle{
+    cursor: pointer;
+}
+
+.p_foods{
+    overflow: hidden;
+    margin: 3px;
+    text-align: left;
+}
+.span_foods{
+    display: inline-block;
+    text-align: left;
+}
 </style>
