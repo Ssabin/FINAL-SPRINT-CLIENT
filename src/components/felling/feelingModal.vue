@@ -2,14 +2,16 @@
   <section>
     <transition name="fade">
       <div v-if="isShowModal">
-        <div class="modal-mask" @click="isShowModal = false">
+        <div class="modal-mask">
           <div class="modal-wrapper">
             <div class="modal-container">
               <div class="modal-header">
                 Hi , how do you feel?
               </div>
               <div class="modal-body">
-
+                <stars></stars>
+                <div @click="isShowModal = false"> close
+                  </div>
               </div>
               <!--<div class="modal-footer">
               default footer
@@ -27,14 +29,15 @@
   </section>
 </template>
 <script>
+import stars from './stars.vue'
   export default {
     data() {
       return {
         isShowModal: false,
-        isShowModal1: false
       }
     },
     components: {
+      stars
     }
   };
 </script>
