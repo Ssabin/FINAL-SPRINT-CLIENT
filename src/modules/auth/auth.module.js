@@ -31,10 +31,9 @@ const mutations = {
       return formatedMeal
     })
   },
-  
   [UPDATE_USER_SETTINGS](state, settings){
     console.log('auth.modules.js: UPDATE_USER_SETTINGS mutations');
-    state.settings = settings;
+    state.user.settings = settings;
   }
 }
 
@@ -43,7 +42,7 @@ const actions = {
     let latestMeals = [];
     let from = 0;
     let to = 0
-    Vue.http.post('http://localhost:3003/usermeals', {
+    Vue.http.post('http://localhost:3004/usermeals', {
       "userId": state.user._id,
       "from": "" + filter.start,
       "to": "" + filter.end
@@ -61,15 +60,9 @@ const actions = {
       time: Date.now(),
       userId: state.user._id
     }
-    Vue.http.post('http://localhost:3003/data/meal', meal)
+    Vue.http.post('http://localhost:3004/data/meal', meal)
       .then(res => res.json())
       .then(meal => meal)
-  },
-  updateSettings( state , settings){
-    //update the state
-    state.commit(UPDATE_USER_SETTINGS, settings);      
-    // console.log('1: auth.modules.js updateSettings: settings', settings);  
-
   }
 };
 

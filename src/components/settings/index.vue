@@ -39,6 +39,7 @@
 
 <script>
 import authService from '../../services/auth.service';
+import {UPDATE_USER_SETTINGS} from '../../modules/auth/auth.module.js'
 
 export default{
     data(){
@@ -55,12 +56,16 @@ export default{
             this.settings.lang = ev.target.innerText;
         },
         submitSettings(){
+            //update the storage
+            this.$store.commit(UPDATE_USER_SETTINGS , this.settings);
+
+            //get user from store.getters
+            let user = this.$store.getters.user;
             //update the server and DB
-            authService.updateUserSettings(this.settings)
+            authService.updateUserSettings(user)
             .then(res => {
-                //update the storage
-                this.$store.dispatch('updateSettings', res);
-                // this.$router.go(-1);
+                console.log('success' , res);
+                // this.$store.dispatch('updateSettings', res);
             })
             .catch(err => {
                 err.json().then(res => this.error = res.error);
