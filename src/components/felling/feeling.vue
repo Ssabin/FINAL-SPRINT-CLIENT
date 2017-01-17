@@ -3,12 +3,11 @@
         <h4> Update your feelling List of feellings
         </h4>
         <feeling-modal></feeling-modal>
-
         <!--
             TODO:
-                Show feeling List
-                This needs to be some sort of modal
-                MODAL with stars
+                CONNECET modal and COMPONENTS to STORE & DB
+
+                ??Show feeling List
         -->
     </section>
 </template>
