@@ -1,6 +1,7 @@
 <template >
     <section>
         My meals
+        <h3><span style="background-color: grey">here will be the filter</span></h3>
         <meals-calender></meals-calender>
         <!--
             TODO:
