@@ -5,15 +5,19 @@
             <rating :items="items" :value="value" @click="update" class="starability-slot"></rating>
             <!--<rating :items="items" legend="?" :value="value" @click="update" class="starability-slot"></rating>-->
         </form>
+        <button @click="value++">+</button>
         <div>
             {{value}}
+        </div>
+        <div>
+            {{selected}}
         </div>
     </section>
 </template>
 
 
 <script>
-    import Rating from 'vue-bulma-rating'
+    import Rating from './bulma-rating'
 
     export default {
         components: {
@@ -23,6 +27,7 @@
         data() {
             return {
                 value: 0,
+                selected:0,
                 items: [
                     {
                         title: '5 Stars',
