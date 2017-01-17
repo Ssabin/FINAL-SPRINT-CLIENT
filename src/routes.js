@@ -7,19 +7,19 @@ import MyMeals from './components/mymeals'
 import GlobalStatistics from './components/globalstatistics'
 import UserStatistics from './components/userstatistics'
 import Settings from './components/settings'
-import Feelings from './components/felling/feeling'
+import Feelings from './components/feeling/feeling'
 
 import Admin from './components/admin/admin';
 
 const routes = [{
-  path     : '/',
-  name     : 'home',
-  component: Home
-}, {
-  path     : '/signin',
-  name     : 'signin',
-  component: Signin
-},
+    path     : '/',
+    name     : 'home',
+    component: Home
+  }, {
+    path     : '/signin',
+    name     : 'signin',
+    component: Signin
+  },
   {
     path     : '/signup',
     name     : 'signup',

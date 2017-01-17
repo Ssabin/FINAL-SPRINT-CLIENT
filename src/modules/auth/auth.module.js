@@ -32,7 +32,6 @@ const mutations = {
     })
   },
   [UPDATE_USER_SETTINGS](state, settings){
-    console.log('auth.modules.js: UPDATE_USER_SETTINGS mutations');
     state.user.settings = settings;
   }
 }
@@ -47,11 +46,11 @@ const actions = {
       "from": "" + filter.start,
       "to": "" + filter.end
     })
-      .then(res => res.json())
-      .then(meals => {
-        latestMeals = meals.meals;
-        commit('latestMeals', latestMeals);
-      })
+    .then(res => res.json())
+    .then(meals => {
+      latestMeals = meals.meals;
+      commit('latestMeals', latestMeals);
+    })
   },
 
   postMeal({state}, foods) {

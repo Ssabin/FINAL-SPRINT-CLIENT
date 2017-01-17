@@ -1,7 +1,6 @@
 import Vue from 'vue';
 
-/**
- *
+/*
  * @param email
  * @param password
  * @returns {Promise}
@@ -17,11 +16,6 @@ function signin( {email,password} ) {
     })
 }
 
-/**
- *
- * @param email
- * @param password
- */
 function signup( { email, password } ) {
   const userToRegister = {
     email,
@@ -33,41 +27,28 @@ function signup( { email, password } ) {
     }
   }
   return Vue.http.post('http://localhost:3004/data/user', userToRegister )
-                 .then( res => res.json())
-                 .then( user => {
-                   return user;
-                 })
+  .then( res => res.json())
+  .then( user => {
+    return user;
+  })
 }
 
-/**
- *
- * @param token
- */
 function setSession( token, user ) {
   localStorage.setItem('token', token);
   localStorage.setItem('user', JSON.stringify(user));
 }
 
-/**
- * Remove session
- */
+// Remove session
 function signout() {
   localStorage.removeItem('token');
   localStorage.removeItem('user');
 }
 
-/**
- *
- * @returns {boolean}
- */
+// @returns {boolean}
 function isLoggedIn() {
   return !!localStorage.getItem('token');
 }
 
-/**
- *
- * @param next
- */
 function protectRoute( next ) {
   if( isLoggedIn() ) {
     next();
@@ -76,20 +57,16 @@ function protectRoute( next ) {
   }
 }
 
-/**
- * @param email, password
- */
 function updateUserSettings( user ) {
   //get user id
   console.log('auth.service.js updateUserSettings: ', user._id);
 
-    return Vue.http.put(`http://localhost:3004/data/user/${user._id}`, user)
-   .then(res => res.json())
-   .then(user => {
-     console.log('Signedin user:', user);
-    //  setSession(token, user);
-     return user;
-   })
+  return Vue.http.put(`http://localhost:3004/data/user/${user._id}`, user)
+  .then(res => res.json())
+  .then(user => {
+    console.log('Signedin user:', user);
+    return user;
+  })
 }
 
 

@@ -1,24 +1,24 @@
 <template >
     <section>
         My meals
-        <meals-calender></meals-calender>
+        <meals-calendar></meals-calendar>
         <!--
             TODO:
-                Calender - google calender?
+                Calendar - google calendar?
                 Do we need preview meal and review meal?
                 Color meals by feeling
         -->
     </section>
 </template>
 <script>
-    import MealsCalender from '../mealscalender'
+    import MealsCalendar from '../MealsCalendar'
     export default{
         data(){
             return {
             }
         },
         components:{
-            MealsCalender
+            MealsCalendar
         }
     }
 </script>

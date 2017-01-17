@@ -2,10 +2,7 @@
     <section>
         SETTINGS
 
-        <br />
-        
-        
-        <br />
+        <br /><br />
         <div class="frame_feature">
             
             <br />
@@ -75,7 +72,6 @@ export default{
     components:{
     },
     mounted(){
-        // console.log('updateSettings from indexvue', updateSettings);
     }
 }
 </script>
