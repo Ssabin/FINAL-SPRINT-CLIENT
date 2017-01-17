@@ -1,11 +1,11 @@
 <template>
     <section>
         <div v-for="meal in userLatestMeals">
-            <h2>Meal at {{meal.start}}</h2>
+            <!--<h2>Meal at {{meal.start}}</h2>
             <p>You ate:</p>
             <ul>
                 <li>{{meal.title}}</li>
-            </ul>
+            </ul>-->
         </div>
         <div class="calendar">
 
