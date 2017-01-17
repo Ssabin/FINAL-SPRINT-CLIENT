@@ -17,7 +17,8 @@
             </div>
             <p class="p_foods">
                 <span class="span_foods" v-for="(food, index) in foods">
-                    <i @click="deleteFood(index)" title="Delete this food" class="fa fa-times-circle" aria-hidden="true"></i> {{food}},&nbsp;&nbsp;
+                    <i @click="deleteFood(index)" title="Delete this food" class="fa fa-times-circle" aria-hidden="true"></i>
+                    <span :value="food" @keyup="updateFood($event , index)" class="span_food_edit" contentEditable="true">{{food}}</span>&nbsp;&nbsp;&nbsp;
                 </span>
             </p>
             <br />
@@ -82,6 +83,9 @@
                 this.foods = [];
                 this.isRec = false;
                 this.recognition.stop();
+            },
+            updateFood(ev, idx){
+                this.foods[idx] = ev.target.value;
             },
             toogleSpeechReco() {
                 if (this.isRec) this.recognition.stop();
@@ -180,5 +184,13 @@
 .span_foods{
     display: inline-block;
     text-align: left;
+}
+.span_food_edit{
+    background: white;
+    padding: 0 4px;
+    border-radius: 2px;
+    border: solid 1px lightgrey;
+    display: inline-block;
+    margin: 2px 0; 
 }
 </style>
