@@ -47,14 +47,14 @@
                         <li v-if="!this.isLoggedIn" title="Sign up"  @click="closeMenu()">
                             <router-link to="/signup">Sign up</router-link>
                         </li>
-                        <li v-if="this.isLoggedIn"  @click="closeMenu()">
-                            <a href="#" @click="signOut" title="Sign out">Sign out</a>
+                        <li v-if="this.isLoggedIn"  @click="closeMenu()" style="cursor: pointer">
+                            <a to="/" @click="signOut">Sign out</a>
                         </li>
                         <li v-if="!this.isLoggedIn || true" title="User Feels"  @click="closeMenu()">
                             <router-link to="/feelings">User Feels</router-link>
                         </li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right" v-if="user">
                         <li><a href="#" style="cursor: default;" >{{user.email}}</a></li>
                     </ul>
 
@@ -66,7 +66,7 @@
 
 <script>
     import { mapGetters } from 'vuex';
-    // import authService from '../../services/auth.service';
+    import authService from '../../services/auth.service';
     // import authModule from '../../modules/auth/auth.module';
 
     export default {

@@ -43,6 +43,7 @@ function setSession( token, user ) {
 function signout() {
   localStorage.removeItem('token');
   localStorage.removeItem('user');
+  history.go(0);
 }
 
 // @returns {boolean}
