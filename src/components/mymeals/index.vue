@@ -12,7 +12,7 @@
     </section>
 </template>
 <script>
-    import MealsCalender from '../mealscalender'
+    import MealsCalender from '../mealscalendar'
     import mealsFilter from './mealsFilter/mealsFilter'
     import { mapGetters } from 'vuex';
 
