@@ -1,13 +1,16 @@
 import './style.scss';
+import 'bootstrap/dist/js/bootstrap.min.js'
 import './vendor';
 import './vue-plugins';
 
 import Vue from 'vue';
+
 import store from './store';
 import router from './routes';
 
 import Navbar from './components/navbar/navbar'
 import FeelingModal from './components/feeling/feelingModal'
+
 const app = new Vue({
   router,
   store,
