@@ -12,7 +12,7 @@
     </section>
 </template>
 <script>
-    import MealsCalendar from '../MealsCalendar'
+    import MealsCalendar from '../mealscalendar'
     export default{
         data(){
             return {
