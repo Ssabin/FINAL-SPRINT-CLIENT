@@ -13,8 +13,8 @@
     <router-view></router-view>
     <feeling-modal :show-modal="showModal" @close="showModal = false"></feeling-modal>
     <div class="row">
-      <router-link to="/" class="col-xs-1 btn btn-default btn-info" style="position: fixed; left: 10px">Add Meal</router-link>
-      <button @click="showModal=true" class="col-xs-1 btn btn-default btn-success" style="position: fixed; right: 10px">Add Feeling</button>
+      <router-link to="/" class="col-xs-1 btn btn-default btn-info meal-btn">Add Meal</router-link>
+      <button @click="showModal=true" class="col-xs-1 btn btn-default btn-success feel-btn">Add Feeling</button>
     </div>
   </div>
 </body>
