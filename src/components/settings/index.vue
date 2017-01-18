@@ -1,6 +1,6 @@
 <template>
     <section>
-        SETTINGS
+        <h1 class="title">Settings</h1>
 
         <br /><br />
         <div class="frame_feature">
@@ -13,10 +13,9 @@
                 <select v-model="settings.pushTimer" class="form-control">
                     <option>{{settings.pushTimer}}</option>
                     <option v-for="option in options" :value="option">
-                        {{ option }}
+                        {{ option.text }}
                     </option>
                 </select>
-                
                 <div class="lang_container">
                     <h4>Select langauge:</h4>
                     <div @click="changeLang" class="lang_choose">En</div>
@@ -41,7 +40,12 @@ import {UPDATE_USER_SETTINGS} from '../../modules/auth/auth.module.js'
 export default{
     data(){
         return {
-            options: ['1 hour', '2 hours', '4 hours', '6 hours'],
+            options: [
+                {text:'1 hour' , val: 1},
+                {text:'2 hour' , val: 2},
+                {text:'4 hour' , val: 4},
+                {text:'6 hour' , val: 6}
+            ],
             settings: {
                 pushTimer: 'No push notifications',
                 lang: 'en'
@@ -54,6 +58,7 @@ export default{
         },
         submitSettings(){
             //update the storage
+            this.settings.pushTimer = this.settings.pushTimer.val;
             this.$store.commit(UPDATE_USER_SETTINGS , this.settings);
 
             //get user from store.getters
@@ -114,5 +119,8 @@ export default{
 
     .submit_lang{
         text-align: right;
+    }
+    .title{
+        text-align: center;
     }
 </style>
