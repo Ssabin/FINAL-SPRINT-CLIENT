@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <title>Food-Trucker</title>
@@ -11,10 +10,12 @@
   <div id="app">
     <navbar></navbar>
     <router-view></router-view>
-    <feeling-modal :show-modal="showModal" @close="showModal = false"></feeling-modal>
+    <feeling-modal :show-modal="showModal" @error="toastrFailed" @success="toastrSuccess" @close="showModal = false"></feeling-modal>
     <div class="row">
       <router-link to="/" class="col-xs-1 btn btn-default btn-info meal-btn">Add Meal</router-link>
       <button @click="showModal=true" class="col-xs-1 btn btn-default btn-success feel-btn">Add Feeling</button>
+      <!-- user msg -->
+      <vue-toastr ref="mainToastr"></vue-toastr>
     </div>
   </div>
 </body>

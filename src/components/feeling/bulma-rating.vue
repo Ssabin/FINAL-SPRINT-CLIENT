@@ -5,7 +5,6 @@
       <input type="radio" :id="uuid(index)" name="rating" :value="item.value" :checked="hasChecked(index)" @change="change($event)">
       <label class="touchable" :for="uuid(index)" :title="item.title || ''">{{ item.label || '' }}</label>
     </template>
-    {{selectedRating}}
   </fieldset>
 </template>
 

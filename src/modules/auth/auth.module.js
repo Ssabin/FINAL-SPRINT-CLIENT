@@ -6,7 +6,7 @@ export const UPDATE_USER_SETTINGS = 'meal_modules/UPDATE_USER_SETTINGS';
 
 const state = {
   isLoggedIn: !!localStorage.getItem('token'),
-  // enteredFirstMeal: !!localStorage.getItem('firstMeal'),
+  enteredFirstMeal: !!localStorage.getItem('firstMeal'),
   user: JSON.parse(localStorage.getItem('user')),
   userLatestMeals: [],
   settings: { 'pushTimer': '1 hour', 'lang': 'en' },
@@ -27,13 +27,10 @@ const mutations = {
     state.isLoggedIn = false;
   },
   [UPDATE_USER_SETTINGS](state, settings){
-    console.log('auth.modules.js: UPDATE_USER_SETTINGS mutations');
     state.user.settings = settings;
   },
   changeFoodFilter(state, food) {
-    console.log('food filter changed in store:', food)
-    state.filterOfMeals.food = food;
-    
+    state.filterOfMeals.food = food;    
   },
   
 }

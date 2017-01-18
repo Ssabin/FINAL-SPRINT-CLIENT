@@ -14,7 +14,7 @@ const mutations = {
 const actions = {
   postFeeling(){
     //   console.log(authModule.state.user._id);
-      Vue.http.post('http://localhost:3004/data/feeling', {
+      return Vue.http.post('http://localhost:3004/data/feeling', {
       "userId": authModule.state.user._id,
       "time": "" + new Date().getTime(),
       "rating": "" + state.selectedRating

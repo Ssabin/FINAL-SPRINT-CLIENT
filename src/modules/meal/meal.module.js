@@ -56,7 +56,7 @@ const actions = {
       time: Date.now(),
       userId: state.user._id
     }
-    Vue.http.post('http://localhost:3004/data/meal', meal)
+    return Vue.http.post('http://localhost:3004/data/meal', meal)
       .then(res => res.json())
       .then(meal => meal)
   }
