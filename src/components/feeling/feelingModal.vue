@@ -1,7 +1,7 @@
 <template>
-  <section>
+  <section v-if="showModal">
     <transition name="fade">
-      <div v-if="isShowModal">
+      <div>
         <div class="modal-mask">
           <div class="modal-wrapper">
             <div class="modal-container">
@@ -10,7 +10,7 @@
               </div>
               <div class="modal-body">
                 <stars></stars>
-                <button @click="isShowModal = false"> close
+                <button @click="emitCloseModal"> close
                   </button>
                   <button @click="submitRating">Submit</button>
               </div>
@@ -19,23 +19,25 @@
         </div>
       </div>
     </transition>
-
-    <div>
-      <button @click="isShowModal = !isShowModal">Show Modal</button>
-    </div>
   </section>
 </template>
 <script>
 import stars from './stars.vue'
+
   export default {
+    props: ['showModal'],
     data() {
       return {
-        isShowModal: false,
       }
     },
     methods:{
       submitRating(){
         this.$store.dispatch('postFeeling');
+      },
+      emitCloseModal(){
+        this.showModal = false;
+        // console.log('closeModal')
+        this.$emit('close')
       }
     },
     components: {
