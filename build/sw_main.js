@@ -16,7 +16,8 @@ self.addEventListener('push', function(event) {
 
 self.addEventListener('notificationclick', function (event) {
   event.notification.close();
-  clients.openWindow("http://localhost:8080/feelings");  
+  clients.openWindow("http://localhost:8080/#" , '_blank');
+  event.notification.close();
 });
 
 

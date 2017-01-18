@@ -2,7 +2,8 @@
     <section>
         <h4> Update your feelling List of feellings
         </h4>
-        <feeling-modal></feeling-modal>
+        <feeling-modal :show-modal="showModal"></feeling-modal>
+        <button @click="showModal=true">Show Modal</button>
         <!--
             TODO:
                 CONNECET modal and COMPONENTS to STORE & DB
@@ -16,6 +17,7 @@
     export default {
         data() {
             return {
+                showModal: false
             }
         },
         components: {
