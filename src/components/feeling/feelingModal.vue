@@ -10,9 +10,9 @@
               </div>
               <div class="modal-body">
                 <stars></stars>
-                <button @click="emitCloseModal"> close
+                <button class="btn btn-default" @click="emitCloseModal"> Close
                   </button>
-                <button @click="submitRating">Submit</button>
+                <button class="btn btn-success" @click="submitRating">Submit</button>
               </div>
             </div>
           </div>
