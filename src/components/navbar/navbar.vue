@@ -26,7 +26,7 @@
                 <a href="" @click="signOut">Sign out</a>
             </li>
             <li v-if="!this.isLoggedIn || true">
-                <router-link to="/feelings">User Fells</router-link>
+                <router-link to="/feelings">User Feels</router-link>
             </li>
         </ul>
     </section>
@@ -38,7 +38,6 @@
     export default {
         data() {
             return {
-                
             }
         },
          computed: {

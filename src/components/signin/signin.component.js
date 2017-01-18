@@ -2,7 +2,7 @@ import authService from '../../services/auth.service';
 import {SIGN_IN, SIGN_OUT} from '../../modules/auth/auth.module';
 
 export default  {
-  data   : () => {
+  data: () => {
     return {
       user : { email: '', password: '' },
       error: ""

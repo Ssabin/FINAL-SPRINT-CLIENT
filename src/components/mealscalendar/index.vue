@@ -33,7 +33,6 @@
         computed: {
             ...mapGetters(['userLatestMeals']),
             filter() {
-                // console.log('hi')
                 let calendar = $('.calendar');
                 if (calendar.length) {
                     return {
@@ -52,7 +51,6 @@
             userLatestMeals: function (meals) {
                 $('.calendar').fullCalendar({
                     // put your options and callbacks here
-
                     // hiddenDays: [  4, 5,6 ], //choose which days to hide
                     // hiddenDays: [ 0, 1,2,3 ],
                     defaultView: 'agendaWeek',
@@ -60,13 +58,12 @@
                     views: {
                         month: { // name of view
                             titleFormat: 'YYYY, MM, DD' // name of view
-                            // other view-specific options here
                         },
                         agendaWeek: {
                             titleFormat: 'YYYY, MM, DD'
                         }
                     },
-                viewRender: (view, element) => {
+                    viewRender: (view, element) => {
                         let filter = {
                             start: $('.calendar').fullCalendar('getView').start._d.getTime(),
                             end: $('.calendar').fullCalendar('getView').end._d.getTime()

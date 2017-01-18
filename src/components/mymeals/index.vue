@@ -1,25 +1,25 @@
 <template >
     <section>
         My meals
+        <meals-calendar></meals-calendar>
         <h3><span style="background-color: grey">here will be the filter</span></h3>
-        <meals-calender></meals-calender>
         <!--
             TODO:
-                Calender - google calender?
+                Calendar - google calendar?
                 Do we need preview meal and review meal?
                 Color meals by feeling
         -->
     </section>
 </template>
 <script>
-    import MealsCalender from '../mealscalender'
+    import MealsCalendar from '../MealsCalendar'
     export default{
         data(){
             return {
             }
         },
         components:{
-            MealsCalender
+            MealsCalendar
         }
     }
 </script>
