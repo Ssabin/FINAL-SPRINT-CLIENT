@@ -12,8 +12,8 @@
     <router-view></router-view>
     <feeling-modal :show-modal="showModal" @error="toastrFailed" @success="toastrSuccess" @close="showModal = false"></feeling-modal>
     <div class="row">
-      <router-link to="/" class="col-xs-1 btn btn-default btn-info meal-btn">Add Meal</router-link>
-      <button @click="showModal=true" class="col-xs-1 btn btn-default btn-success feel-btn">Add Feeling</button>
+      <router-link to="/" class="col-xs-1 btn btn-default btn-info fixed-btn fixed-btn-left">Add <br> Meal</router-link>
+      <button @click="showModal=true" class="col-xs-1 btn btn-default btn-success fixed-btn fixed-btn-right">Add <br> Feeling</button>
       <!-- user msg -->
       <vue-toastr ref="mainToastr"></vue-toastr>
     </div>
