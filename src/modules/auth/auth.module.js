@@ -8,7 +8,14 @@ const state = {
   isLoggedIn: !!localStorage.getItem('token'),
   // enteredFirstMeal: !!localStorage.getItem('firstMeal'),
   user: JSON.parse(localStorage.getItem('user')),
-  settings: {'pushTimer': '1 hour', 'lang': 'en'}
+  userLatestMeals: [],
+  settings: { 'pushTimer': '1 hour', 'lang': 'en' },
+  filterOfMeals: {
+    food: '',
+    feeling: '',
+    start: 0,
+    end: Infinity,
+  },
 };
 
 const mutations = {
@@ -22,7 +29,13 @@ const mutations = {
   [UPDATE_USER_SETTINGS](state, settings){
     console.log('auth.modules.js: UPDATE_USER_SETTINGS mutations');
     state.user.settings = settings;
-  }
+  },
+  changeFoodFilter(state, food) {
+    console.log('food filter changed in store:', food)
+    state.filterOfMeals.food = food;
+    
+  },
+  
 }
 
 const actions = {
