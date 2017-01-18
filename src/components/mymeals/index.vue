@@ -2,6 +2,7 @@
     <section>
         My meals
         <meals-calendar></meals-calendar>
+        <h3><span style="background-color: grey">here will be the filter</span></h3>
         <!--
             TODO:
                 Calendar - google calendar?

@@ -19,6 +19,10 @@ var proxyTable = config.dev.proxyTable
 var app = express()
 var compiler = webpack(webpackConfig)
 
+app.get('/sw_main.js', (req, res)=>{
+ res.sendFile(__dirname + '/sw_main.js');
+});
+
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
   stats: {
