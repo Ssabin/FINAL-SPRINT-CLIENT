@@ -34,13 +34,14 @@
         -->
 
         <br /><br />
-
+        <button @click="pushNotification()">click</button>
     </section>
 </template>
 
 <script>
 
     import { mapGetters } from 'vuex';
+    import {pushNotif} from '../../serviceWorkerInit'
     export default {
         data() {
             return {
@@ -93,6 +94,9 @@
             },
             deleteFood(idx){
                 this.foods.splice(idx, 1);
+            },
+            pushNotification(){
+                pushNotif();
             }
         },
         components: {
