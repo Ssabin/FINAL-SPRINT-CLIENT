@@ -1,11 +1,8 @@
 <template>
     <section>
         <form>
-            <!--// TO DO RATING RENDERING BY STARS-->
             <rating :items="items" :value="value" @click="update" class="starability-slot"></rating>
-            <!--<rating :items="items" legend="?" :value="value" @click="update" class="starability-slot"></rating>-->
         </form>
-        {{selected}}
     </section>
 </template>
 
