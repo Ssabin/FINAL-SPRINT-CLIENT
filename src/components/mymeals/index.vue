@@ -1,9 +1,8 @@
-<template >
+<template>
     <section>
-        My meals
-        <!--<h3><span style="background-color: grey">here will be the filter</span></h3>-->
+        My meals {{filterOfMeals.food}}
         <meals-filter></meals-filter>
-        <meals-calender></meals-calender>
+        <meals-calender :filteredMeals="filteredMeals"></meals-calender>
         <!--
             TODO:
                 Calender - google calender?
@@ -15,19 +14,33 @@
 <script>
     import MealsCalender from '../mealscalender'
     import mealsFilter from './mealsFilter/mealsFilter'
-    
-    export default{
-        data(){
+    import { mapGetters } from 'vuex';
+
+    export default {
+        data() {
             return {
             }
         },
-        components:{
-            MealsCalender,mealsFilter
+        methods: {  
+        },
+        computed: {
+            ...mapGetters(['userLatestMeals','filterOfMeals']),
+            filteredMeals(){
+                if (this.filterOfMeals.food === '' && this.filterOfMeals.feeling === '') return this.userLatestMeals
+                return this.userLatestMeals.filter(meal=>{
+                    if (meal.title.includes(this.filterOfMeals.food))
+                    return meal;
+                })
+            }
+        },
+        components: {
+            MealsCalender, mealsFilter
+        },
+        created() {
+            this.$store.dispatch('getLatestMeals', this.filterOfMeals)
         }
     }
 </script>
 <style scoped lang="scss">
     
 </style>
-
-

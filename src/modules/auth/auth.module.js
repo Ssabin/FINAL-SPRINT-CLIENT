@@ -9,7 +9,13 @@ const state = {
   // enteredFirstMeal: !!localStorage.getItem('firstMeal'),
   user: JSON.parse(localStorage.getItem('user')),
   userLatestMeals: [],
-  settings: {'pushTimer': '1 hour', 'lang': 'en'}
+  settings: { 'pushTimer': '1 hour', 'lang': 'en' },
+  filterOfMeals: {
+    food: '',
+    feeling: '',
+    start: 0,
+    end: Infinity,
+  },
 };
 
 const mutations = {
@@ -23,7 +29,7 @@ const mutations = {
   latestMeals(state, payload) {
     let i = 0;
     state.userLatestMeals = payload.map(meal => {
-      const formatedMeal= {};
+      const formatedMeal = {};
       formatedMeal.id = i++;
       formatedMeal.start = moment(Number(meal.time)).format();
       formatedMeal.end = moment(Number(meal.time)).format();
@@ -31,14 +37,20 @@ const mutations = {
       return formatedMeal
     })
   },
-  [UPDATE_USER_SETTINGS](state, settings){
+  [UPDATE_USER_SETTINGS](state, settings) {
     console.log('auth.modules.js: UPDATE_USER_SETTINGS mutations');
     state.user.settings = settings;
-  }
+  },
+  changeFoodFilter(state, food) {
+    console.log('food filter changed in store:', food)
+    state.filterOfMeals.food = food;
+    
+  },
+  
 }
 
 const actions = {
-  getLatestMeals({state, commit},  filter) {
+  getLatestMeals({state, commit}, filter) {
     let latestMeals = [];
     let from = 0;
     let to = 0
@@ -70,8 +82,10 @@ const getters = {
   isLoggedIn: state => state.isLoggedIn,
   enteredFirstMeal: state => state.enteredFirstMeal,
   user: state => state.user,
-  userLatestMeals: state => state.userLatestMeals
-}; 
+  userLatestMeals: state => state.userLatestMeals,
+  filterOfMeals: state => state.filterOfMeals,
+
+};
 
 
 export default {
