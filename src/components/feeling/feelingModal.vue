@@ -10,13 +10,10 @@
               </div>
               <div class="modal-body">
                 <stars></stars>
-                <div @click="isShowModal = false"> close
-                  </div>
+                <button @click="isShowModal = false"> close
+                  </button>
+                  <button @click="submitRating">Submit</button>
               </div>
-              <!--<div class="modal-footer">
-              default footer
-              <button class="modal-default-button">OK</button>
-            </div>-->
             </div>
           </div>
         </div>
@@ -34,6 +31,11 @@ import stars from './stars.vue'
     data() {
       return {
         isShowModal: false,
+      }
+    },
+    methods:{
+      submitRating(){
+        this.$store.dispatch('postFeeling');
       }
     },
     components: {

@@ -5,10 +5,12 @@
       <input type="radio" :id="uuid(index)" name="rating" :value="item.value" :checked="hasChecked(index)" @change="change($event)">
       <label class="touchable" :for="uuid(index)" :title="item.title || ''">{{ item.label || '' }}</label>
     </template>
+    {{selectedRating}}
   </fieldset>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   props: {
     legend: String,
@@ -44,11 +46,14 @@ export default {
 
     change (e) {
       this.selected = e.target.value >>> 0
+      // console.log(this.selected)
+      this.$store.commit('changeSelectedRating' , this.selected);
       this.$emit('change', this.selected)
     }
   },
 
   computed: {
+    ...mapGetters(['selectedRating']),
     count () {
       return this.items.length
     }
