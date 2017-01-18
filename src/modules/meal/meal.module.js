@@ -13,7 +13,7 @@ const state = {
     start: 0,
     end: Infinity,
   }
-};
+}
 
 const mutations = {
   latestMeals(state, payload) {
@@ -27,9 +27,10 @@ const mutations = {
       return formatedMeal
     })
   },
-    changeFoodFilter(state, food) {
+  changeFoodFilter(state, food) {
     console.log('food filter changed in store:', food)
     state.filterOfMeals.food = food;
+  }
 }
 
 const actions = {
