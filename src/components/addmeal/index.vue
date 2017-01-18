@@ -1,9 +1,7 @@
 <template>
     <section>
-        Add a Meal
         <br />
         <br />
-        {{enteredFirstMeal}} , {{localFirstMeal}}
         <div class="frame_feature">
             <div @click="toogleSpeechReco" class="record_food"><i class="fa fa-microphone fa-4x" aria-hidden="true"></i></div>
 
@@ -40,7 +38,7 @@
         -->
 
         <br /><br />
-        <button @click="pushNotification()">click</button>
+        <!--<button @click="pushNotification()">click</button>-->
     </section>
 </template>
 
@@ -48,6 +46,7 @@
 
     import { mapGetters } from 'vuex';
     import {pushNotif} from '../../serviceWorkerInit'
+    import moment from 'moment';
     export default {
         data() {
             return {
@@ -80,8 +79,12 @@
             submitMeal() {
                 if (this.isLoggedIn) {
                     this.$store.dispatch('postMeal', this.foods)
-                        .then(_ => {
-                            console.log('Meal added successfully');
+                        .then(meal => {
+                            let msg = {
+                                foods: meal.foods,
+                                msg: `How are you feeling after eating in ${moment(meal.time).format('MMMM Do YYYY, h:mm:ss a')}`
+                            }
+                            pushNotif(msg)
                         });
                 }else if(!this.enteredFirstMeal || !this.localFirstMeal){
                     localStorage.setItem('firstMeal' , this.foods);
@@ -94,7 +97,7 @@
                 this.isRec = false;
                 this.recognition.stop();
                 //user msg and re-disabaling the submit btn
-                this.$refs.toastr.s('Your foods were added to the DB', 'Thanks!');
+                this.$refs.toastr.s('Your meal were saved', 'Thanks!');
 	            this.isDisabled = true;
             },
             updateFood(ev, idx){

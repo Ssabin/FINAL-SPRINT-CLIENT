@@ -31,9 +31,24 @@ fieldset {
   border: none;
 }
 
-// button {
-//   border: none;
-//   background-color: transparent;
-//   cursor: pointer;
-//   font-family: var(--primary-font);
-// }
+.fixed-btn{
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 10px;
+  z-index: 9999;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+}
+
+.fixed-btn-right{
+  right: 10px;
+}
+
+.fixed-btn-left{
+  left: 10px;
+}

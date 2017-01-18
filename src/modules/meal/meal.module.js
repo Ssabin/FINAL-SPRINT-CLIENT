@@ -5,7 +5,15 @@ import moment from 'moment';
 const state = {
   userLatestMeals: [],
   user: JSON.parse(localStorage.getItem('user')),
-};
+  userLatestMeals: [],
+  settings: { 'pushTimer': '1 hour', 'lang': 'en' },
+  filterOfMeals: {
+    food: '',
+    feeling: '',
+    start: 0,
+    end: Infinity,
+  }
+}
 
 const mutations = {
   latestMeals(state, payload) {
@@ -19,6 +27,10 @@ const mutations = {
       return formatedMeal
     })
   },
+  changeFoodFilter(state, food) {
+    console.log('food filter changed in store:', food)
+    state.filterOfMeals.food = food;
+  }
 }
 
 const actions = {
@@ -44,14 +56,15 @@ const actions = {
       time: Date.now(),
       userId: state.user._id
     }
-    Vue.http.post('http://localhost:3004/data/meal', meal)
+    return Vue.http.post('http://localhost:3004/data/meal', meal)
       .then(res => res.json())
       .then(meal => meal)
   }
 };
 
 const getters = {
-  userLatestMeals: state => state.userLatestMeals
+  userLatestMeals: state => state.userLatestMeals,
+  filterOfMeals: state => state.filterOfMeals,
 };
 
 

@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Food-Trucker</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-  </head>
-  <body>
-    <div id="app">
-      <navbar></navbar>
+<head>
+  <meta charset="utf-8">
+  <title>Food-Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
-      <router-view></router-view>
-      <feeling-modal :show-modal="showModal" @close="showModal = false"></feeling-modal>
-      <router-link to="/">Add Meal abs button</router-link>
-      <button @click="showModal=true">Add Feeling abs button</button>
+<body>
+  <div id="app">
+    <navbar></navbar>
+    <router-view></router-view>
+    <feeling-modal :show-modal="showModal" @error="toastrFailed" @success="toastrSuccess" @close="showModal = false"></feeling-modal>
+    <div class="row">
+      <router-link to="/" class="col-xs-1 btn btn-default btn-info fixed-btn fixed-btn-left">Add <br> Meal</router-link>
+      <button @click="showModal=true" class="col-xs-1 btn btn-default btn-success fixed-btn fixed-btn-right">Add <br> Feeling</button>
+      <!-- user msg -->
+      <vue-toastr ref="mainToastr"></vue-toastr>
     </div>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-  </body>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+</body>
+
 </html>

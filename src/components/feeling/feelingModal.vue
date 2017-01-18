@@ -1,5 +1,5 @@
 <template>
-  <section v-if="showModal">
+  <section v-if="isShown">
     <transition name="fade">
       <div>
         <div class="modal-mask">
@@ -10,9 +10,9 @@
               </div>
               <div class="modal-body">
                 <stars></stars>
-                <button @click="emitCloseModal"> close
+                <button class="btn btn-default" @click="emitCloseModal"> Close
                   </button>
-                  <button @click="submitRating">Submit</button>
+                <button class="btn btn-success" @click="submitRating">Submit</button>
               </div>
             </div>
           </div>
@@ -22,22 +22,37 @@
   </section>
 </template>
 <script>
-import stars from './stars.vue'
-
+  import stars from './stars.vue'
+  import { mapGetters } from 'vuex';
   export default {
     props: ['showModal'],
     data() {
       return {
       }
     },
-    methods:{
-      submitRating(){
-        this.$store.dispatch('postFeeling');
+    computed: {
+      ...mapGetters(['selectedRating']),
+      isShown() {
+        return this.showModal;
+      }
+    },
+    methods: {
+      submitRating() {
+        if (this.selectedRating === 0) return;
+        this.$store.dispatch('postFeeling')
+                   .then(res => {
+                     this.$emit('success');
+                   })
+                   .catch(err => {
+                     this.$emit('error')
+                   })
+        this.isShown = false;
+        this.$emit('close');
       },
-      emitCloseModal(){
-        this.showModal = false;
+      emitCloseModal() {
+        this.isShown = false;
         // console.log('closeModal')
-        this.$emit('close')
+        this.$emit('close');
       }
     },
     components: {

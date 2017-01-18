@@ -22,10 +22,11 @@ self.addEventListener('notificationclick', function (event) {
 
 
 self.addEventListener('message', function (event) {
-  console.log('msg event: ', event.data);
-  const title = 'blabla';
+  let eventMsg = JSON.parse(event.data);
+  console.log('msg event: ', eventMsg.msg);
+  const title = 'Checking you are alive';
   const options = {
-    body: Date.now()
+    body: eventMsg.msg
   };
   setTimeout(function () {
     self.registration.showNotification(title, options)
