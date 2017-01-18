@@ -5,6 +5,14 @@ import moment from 'moment';
 const state = {
   userLatestMeals: [],
   user: JSON.parse(localStorage.getItem('user')),
+  userLatestMeals: [],
+  settings: { 'pushTimer': '1 hour', 'lang': 'en' },
+  filterOfMeals: {
+    food: '',
+    feeling: '',
+    start: 0,
+    end: Infinity,
+  }
 };
 
 const mutations = {
@@ -19,6 +27,9 @@ const mutations = {
       return formatedMeal
     })
   },
+    changeFoodFilter(state, food) {
+    console.log('food filter changed in store:', food)
+    state.filterOfMeals.food = food;
 }
 
 const actions = {
@@ -51,7 +62,8 @@ const actions = {
 };
 
 const getters = {
-  userLatestMeals: state => state.userLatestMeals
+  userLatestMeals: state => state.userLatestMeals,
+  filterOfMeals: state => state.filterOfMeals,
 };
 
 
