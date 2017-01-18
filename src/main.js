@@ -18,6 +18,14 @@ const app = new Vue({
   data: {
     showModal: false
   },
+  methods:{
+    toastrSuccess(){
+      this.$refs.mainToastr.s('Your feelings were saved', 'Thanks!');
+    },
+    toastrFailed(){
+      this.$refs.mainToastr.e('We couldn\'t save your feelings at this time', 'Sorry!');
+    }
+  },
   mounted(){
     if (window.location.href === 'http://localhost:8080/#') this.showModal = true;
   }

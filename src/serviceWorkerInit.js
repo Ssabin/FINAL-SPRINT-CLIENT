@@ -22,8 +22,9 @@ function urlB64ToUint8Array(base64String) {
     return outputArray;
 }
 
-export function pushNotif() {
-    navigator.serviceWorker.controller.postMessage('"{"_id":"58772d40676649ea618b19e9","username":"w@w.com"}"');
+export function pushNotif(msg) {
+    console.log(msg)
+    navigator.serviceWorker.controller.postMessage(JSON.stringify(msg));
 }
 
 function initialiseUI() {
