@@ -70,7 +70,6 @@
                     views: {
                         month: { // name of view
                             titleFormat: 'YYYY, MM, DD' // name of view
-                            // other view-specific options here
                         },
                         agendaWeek: {
                             titleFormat: 'YYYY, MM, DD'

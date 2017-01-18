@@ -18,29 +18,36 @@
             <p class="p_foods">
                 <span class="span_foods" v-for="(food, index) in foods">
                     <i @click="deleteFood(index)" title="Delete this food" class="fa fa-times-circle" aria-hidden="true"></i>
-                    <span :value="food" @keyup="updateFood($event , index)" class="span_food_edit" contentEditable="true">{{food}}</span>&nbsp;&nbsp;&nbsp;
+                    <span :value="food" @keyup="updateFood($event , index)" 
+                            class="span_food_edit" contentEditable="true">{{food}}</span>&nbsp;&nbsp;&nbsp;
                 </span>
+                
+                <br />
+                <button @click="submitMeal" 
+                        :disabled="isDisabled" 
+                        :class="{disable_submit: isDisabled}" 
+                        class="confirm_food"><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
             </p>
-            <br />
-            <div @click="submitMeal" class="confirm_food"><i class="fa fa-check fa-2x" aria-hidden="true"></i></div>
 
         </div>
+        <!-- user msg -->
+        <vue-toastr ref="toastr"></vue-toastr>
+        
         <!--
             TODO:
-                //Record button
-                X on food items                
                 bonus:
                 show common meal items for user in this hours
         -->
 
         <br /><br />
-
+        <button @click="pushNotification()">click</button>
     </section>
 </template>
 
 <script>
 
     import { mapGetters } from 'vuex';
+    import {pushNotif} from '../../serviceWorkerInit'
     export default {
         data() {
             return {
@@ -48,12 +55,13 @@
                 currFood: '',
                 localFirstMeal: false, //localStorage isnt really computed
                 recognition: null,
-                isRec: false
+                isRec: false,
+                isDisabled: true
             }
         },
         computed: {
             enteredFirstMeal(){
-                return !!localStorage.getItem('firstMeal');
+                return !!localStorage.getItem('firstMeal'); 
             },
             ...mapGetters(['isLoggedIn'])
         },
@@ -66,6 +74,8 @@
                 if (this.currFood === '') return;
                 this.foods.push(this.currFood);
                 this.currFood = '';
+                // anable btn V
+                this.isDisabled = false;
             },
             submitMeal() {
                 if (this.isLoggedIn) {
@@ -83,22 +93,33 @@
                 this.foods = [];
                 this.isRec = false;
                 this.recognition.stop();
+                //user msg and re-disabaling the submit btn
+                this.$refs.toastr.s('Your foods were added to the DB', 'Thanks!');
+	            this.isDisabled = true;
             },
             updateFood(ev, idx){
-                this.foods[idx] = ev.target.value;
+                this.foods[idx] = ev.target.textContent.replace(/\n/g, "");
             },
             toogleSpeechReco() {
+                //change btn style on record
+                this.recordViewFeedback();
                 if (this.isRec) this.recognition.stop();
                 else this.recognition.start();
             },
             deleteFood(idx){
                 this.foods.splice(idx, 1);
+            },
+            recordViewFeedback(){
+                document.querySelector('.record_food').style.background = '#f73655'; 
+            },
+            pushNotification(){
+                pushNotif();
             }
         },
         components: {
-            // AddMeal
         },
         mounted() {
+            // alert();            
             if (!('webkitSpeechRecognition' in window)) {
                 console.log('webkitSpeechRecognition not supported');
             } else {
@@ -128,7 +149,8 @@
                     this.isRec = false;
                 }
                 this.recognition.onend = () => {
-                    console.log('done record')
+                    console.log('done record');
+                    document.querySelector('.record_food').style.background = '#337ab7';
                     this.addFood();
                     if (this.isRec) this.recognition.start();
                 }
@@ -140,7 +162,6 @@
 <style scoped>
 .record_food{
     display: inline-block;
-    /*overflow: hidden;*/
     width: 100px;
     height: 100px;
     margin: auto;
@@ -154,19 +175,29 @@
     background: #9bc9f1;
 }
 
+.disable_submit{
+    background: lightgrey !important;
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+}
+
 .confirm_food{
     display: inline-block;
-    /*overflow: hidden;*/
     width: 50px;
     height: 50px;
-    /*margin: auto;*/
-    padding: 10px 0 0 0;
+    padding: 2px 0 0 0;
+    margin: 10px 0;
     border: solid 1px grey;
     border-radius: 25px;
     cursor: pointer;
+    opacity: 1;
     background: #337ab7;
     float: right;  
 
+}
+.confirm_food:focus{
+    background: #9bc9f1;
+    box-shadow: 0 1px 2px grey;
 }
 .confirm_food:hover{
     background: #9bc9f1;

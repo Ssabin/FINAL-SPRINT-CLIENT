@@ -5,7 +5,7 @@
         <meals-calender :filteredMeals="filteredMeals"></meals-calender>
         <!--
             TODO:
-                Calender - google calender?
+                Calendar - google calendar?
                 Do we need preview meal and review meal?
                 Color meals by feeling
         -->

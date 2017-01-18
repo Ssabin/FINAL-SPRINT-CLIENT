@@ -1,7 +1,4 @@
-/**
- *
- * @returns {Promise}
- */
+// @returns {Promise}
 export function getProducts() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -47,7 +44,6 @@ export function generateItems() {
       id         : i,
       title      : `Mastering ${skill}`,
       img        : `https://hotjs.net/img/Logos/${skill}.png`,
-      // img        : `http://thecatapi.com/api/images/get?format=src&type=gif&r=${Math.random()}`,
       price      : (i + 1) * 10,
       currency   : '$',
       quantity   : 0,

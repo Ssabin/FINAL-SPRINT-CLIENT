@@ -3,22 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title>Food-Trucker</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   </head>
   <body>
     <div id="app">
       <navbar></navbar>
       <router-view></router-view>
-      
-      
-      
-      <br>
-      <br>
-      <br>
-      <br>
+      <feeling-modal :show-modal="showModal" @close="showModal = false"></feeling-modal>
       <router-link to="/">Add Meal abs button</router-link>
-      <router-link to="/">Add Feeling abs button</router-link>
+      <button @click="showModal=true">Add Feeling abs button</button>
     </div>
-    <!-- built files will be auto injected -->
   </body>
 </html>

@@ -5,13 +5,7 @@
             <rating :items="items" :value="value" @click="update" class="starability-slot"></rating>
             <!--<rating :items="items" legend="?" :value="value" @click="update" class="starability-slot"></rating>-->
         </form>
-        <button @click="value++">+</button>
-        <div>
-            {{value}}
-        </div>
-        <div>
-            {{selected}}
-        </div>
+        {{selected}}
     </section>
 </template>
 
