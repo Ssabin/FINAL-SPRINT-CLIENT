@@ -23,10 +23,16 @@
                 </span>
                 
                 <br />
-                <button @click="submitMeal" class="confirm_food"><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
+                <button @click="submitMeal" 
+                        :disabled="isDisabled" 
+                        :class="{disable_submit: isDisabled}" 
+                        class="confirm_food"><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
             </p>
 
         </div>
+        <!-- user msg -->
+        <vue-toastr ref="toastr"></vue-toastr>
+        
         <!--
             TODO:
                 bonus:
@@ -48,12 +54,13 @@
                 currFood: '',
                 localFirstMeal: false, //localStorage isnt really computed
                 recognition: null,
-                isRec: false
+                isRec: false,
+                isDisabled: true
             }
         },
         computed: {
             enteredFirstMeal(){
-                return !!localStorage.getItem('firstMeal');
+                return !!localStorage.getItem('firstMeal'); 
             },
             ...mapGetters(['isLoggedIn'])
         },
@@ -66,6 +73,8 @@
                 if (this.currFood === '') return;
                 this.foods.push(this.currFood);
                 this.currFood = '';
+                // anable btn V
+                this.isDisabled = false;
             },
             submitMeal() {
                 if (this.isLoggedIn) {
@@ -83,6 +92,9 @@
                 this.foods = [];
                 this.isRec = false;
                 this.recognition.stop();
+                //user msg and re-disabaling the submit btn
+                this.$refs.toastr.s('Your foods were added to the DB', 'Thanks!');
+	            this.isDisabled = true;
             },
             updateFood(ev, idx){
                 this.foods[idx] = ev.target.textContent.replace(/\n/g, "");
@@ -98,11 +110,12 @@
             },
             recordViewFeedback(){
                 document.querySelector('.record_food').style.background = '#f73655'; 
-            }
+            },
         },
         components: {
         },
         mounted() {
+            // alert();            
             if (!('webkitSpeechRecognition' in window)) {
                 console.log('webkitSpeechRecognition not supported');
             } else {
@@ -158,6 +171,12 @@
     background: #9bc9f1;
 }
 
+.disable_submit{
+    background: lightgrey !important;
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+}
+
 .confirm_food{
     display: inline-block;
     width: 50px;
@@ -167,6 +186,7 @@
     border: solid 1px grey;
     border-radius: 25px;
     cursor: pointer;
+    opacity: 1;
     background: #337ab7;
     float: right;  
 

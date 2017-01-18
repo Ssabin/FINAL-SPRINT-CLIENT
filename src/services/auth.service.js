@@ -29,6 +29,7 @@ function signup( { email, password } ) {
   return Vue.http.post('http://localhost:3004/data/user', userToRegister )
   .then( res => res.json())
   .then( user => {
+    signin(user);
     return user;
   })
 }
