@@ -11,6 +11,11 @@ import router from './routes';
 import Navbar from './components/navbar/navbar'
 import FeelingModal from './components/feeling/feelingModal'
 
+
+if(process.env.NODE_ENV === 'development'){
+  Vue.http.options.root = 'http://localhost:3004';
+}
+
 const app = new Vue({
   router,
   store,
@@ -30,7 +35,7 @@ const app = new Vue({
     }
   },
   mounted(){
-    if (window.location.href === 'http://localhost:8080/#') this.showModal = true;
+    if (window.location.href === '/#') this.showModal = true;
   }
 }).$mount('#app');
 

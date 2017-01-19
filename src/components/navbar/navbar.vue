@@ -16,15 +16,14 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div ref="menu" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-
-                        <li class="active" @click="closeMenu()">
-                            <router-link to="/" title="Home">Home</router-link>
+                        <li @click="closeMenu()">
+                            <router-link to="/" title="Home" active-class="active">Home</router-link>
                         </li>
                         <li v-if="this.isLoggedIn" @click="closeMenu()">
-                            <router-link to="/mymeals" title="My Meals">My Meals</router-link>
+                            <router-link to="/mymeals" title="My Meals" active-class="active">My Meals</router-link>
                         </li>
 
-                        <li class="dropdown">
+                        <!--<li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Statistics <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li v-if="this.isLoggedIn" @click="closeMenu()">
@@ -36,22 +35,22 @@
                                 </li>
                                 <li role="separator" class="divider"></li>
                             </ul>
-                        </li>
+                        </li>-->
 
-                        <li v-if="this.isLoggedIn" title="Settings"  @click="closeMenu()">
-                            <router-link to="/settings">Settings</router-link>
+                        <li v-if="this.isLoggedIn" title="Settings"  @click="closeMenu()" >
+                            <router-link to="/settings" active-class="active">Settings</router-link >
                         </li>
                         <li v-if="!this.isLoggedIn" title="Sign in"  @click="closeMenu()">
-                            <router-link to="/signin">Sign in</router-link>
+                            <router-link to="/signin" active-class="active">Sign in</router-link>
                         </li>
                         <li v-if="!this.isLoggedIn" title="Sign up"  @click="closeMenu()">
-                            <router-link to="/signup">Sign up</router-link>
+                            <router-link to="/signup" active-class="active">Sign up</router-link>
                         </li>
                         <li v-if="this.isLoggedIn"  @click="closeMenu()" style="cursor: pointer">
-                            <a to="/" @click="signOut">Sign out</a>
+                            <a @click="signOut" >Sign out</a>
                         </li>
                         <li v-if="!this.isLoggedIn || true" title="User Feels"  @click="closeMenu()">
-                            <router-link to="/feelings">User Feels</router-link>
+                            <router-link to="/feelings" active-class="active">User Feels</router-link>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right" v-if="user">
@@ -80,6 +79,7 @@
         methods: {
             signOut(){
                 authService.signout();
+                this.$router.push('/');
             },
             closeMenu(){
               $(this.$refs.menu).collapse('hide')
@@ -97,5 +97,21 @@
     font-weight: bold;
     font-style: italic;
 }
+
+  .active {
+    background-color: #e7e7e7;
+  }
+  
+  .navbar-default .navbar-nav > li > a:hover,
+  .navbar-default .navbar-nav > li > a:focus {
+    color: #555;
+    background-color: #e7e7e7;
+  }
+  
+  a:hover,
+  a:focus {
+    color: inherit;
+    text-decoration: none;
+  }
 
 </style>

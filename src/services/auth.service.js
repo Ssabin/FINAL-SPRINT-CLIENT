@@ -6,7 +6,7 @@ import Vue from 'vue';
  * @returns {Promise}
  */
 function signin( {email,password} ) {
-  return Vue.http.post('http://localhost:3004/login', {email, password} )
+  return Vue.http.post('login', {email, password} )
     .then(res => res.json())
     .then(({token, user}) => {
       console.log('Signedin user:', user);
@@ -26,7 +26,7 @@ function signup( { email, password } ) {
         lang : "en"
     }
   }
-  return Vue.http.post('http://localhost:3004/data/user', userToRegister )
+  return Vue.http.post('data/user', userToRegister )
   .then( res => res.json())
   .then( user => {
     signin(user);
@@ -43,7 +43,6 @@ function setSession( token, user ) {
 function signout() {
   localStorage.removeItem('token');
   localStorage.removeItem('user');
-  history.go(0);
 }
 
 // @returns {boolean}
@@ -63,7 +62,7 @@ function updateUserSettings( user ) {
   //get user id
   console.log('auth.service.js updateUserSettings: ', user._id);
 
-  return Vue.http.put(`http://localhost:3004/data/user/${user._id}`, user)
+  return Vue.http.put(`data/user/${user._id}`, user)
   .then(res => res.json())
   .then(user => {
     console.log('Signedin user:', user);

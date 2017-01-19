@@ -20,8 +20,10 @@ const state = {
 
 const mutations = {
   [SIGN_IN](state, user) {
+    console.log('mutate user' , user)
     state.isLoggedIn = true;
     state.user = user;
+    console.log('mutate user after' , state.user)
   },
   [SIGN_OUT](state) {
     state.isLoggedIn = false;
