@@ -17,7 +17,7 @@
                 <div ref="menu" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li @click="closeMenu()">
-                            <router-link to="/" title="Home" active-class="active">Home</router-link>
+                            <router-link to="/" title="Home" active-class="active" exact>Home</router-link>
                         </li>
                         <li v-if="this.isLoggedIn" @click="closeMenu()">
                             <router-link to="/mymeals" title="My Meals" active-class="active">My Meals</router-link>
@@ -79,7 +79,10 @@
         methods: {
             signOut(){
                 authService.signout();
-                this.$router.push('/');
+                setTimeout(()=> {
+                    this.$router.push('/');                                        
+                    history.go(0);
+                }, 1000);
             },
             closeMenu(){
               $(this.$refs.menu).collapse('hide')
