@@ -35,7 +35,12 @@ const app = new Vue({
     }
   },
   mounted(){
-    if (window.location.href === '/#') this.showModal = true;
+    if(process.env.NODE_ENV === 'development'){
+      if (window.location.href === 'http://localhost:8080/#') this.showModal = true;
+    } else{
+      if (window.location.href === 'https://foodtrackers.herokuapp.com/#') this.showModal = true;      
+    }
+    
   }
 }).$mount('#app');
 

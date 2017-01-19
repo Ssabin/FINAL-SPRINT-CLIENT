@@ -1,7 +1,5 @@
 <template>
     <section>
-        <br />
-        <br />
         <div class="frame_feature">
             <div @click="toogleSpeechReco" class="record_food"><i class="fa fa-microphone fa-4x" aria-hidden="true"></i></div>
 

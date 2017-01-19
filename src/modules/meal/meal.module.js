@@ -1,10 +1,8 @@
 import Vue from 'vue';
 import moment from 'moment';
-// import authModule from '../auth/auth.module.js';
+import authModule from '../auth/auth.module'
 
 const state = {
-  userLatestMeals: [],
-  user: JSON.parse(localStorage.getItem('user')),
   userLatestMeals: [],
   settings: { 'pushTimer': '1 hour', 'lang': 'en' },
   filterOfMeals: {
@@ -39,7 +37,7 @@ const actions = {
     let from = 0;
     let to = 0
     Vue.http.post('usermeals', {
-      "userId": state.user._id,
+      "userId": authModule.state.user._id,
       "from": "" + filter.start,
       "to": "" + filter.end
     })
@@ -54,7 +52,7 @@ const actions = {
     const meal = {
       foods,
       time: Date.now(),
-      userId: state.user._id
+      userId: authModule.state.user._id
     }
     return Vue.http.post('data/meal', meal)
       .then(res => res.json())

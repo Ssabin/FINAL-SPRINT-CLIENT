@@ -46,11 +46,11 @@
                    .catch(err => {
                      this.$emit('error')
                    })
-        this.isShown = false;
+        this.showModal = false;
         this.$emit('close');
       },
       emitCloseModal() {
-        this.isShown = false;
+        this.showModal = false;
         // console.log('closeModal')
         this.$emit('close');
       }

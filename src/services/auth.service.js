@@ -9,7 +9,6 @@ function signin( {email,password} ) {
   return Vue.http.post('login', {email, password} )
     .then(res => res.json())
     .then(({token, user}) => {
-      console.log('Signedin user:', user);
       localStorage.removeItem('firstMeal');
       setSession(token, user);
       return user;
