@@ -38,7 +38,7 @@ const actions = {
     let latestMeals = [];
     let from = 0;
     let to = 0
-    Vue.http.post('http://localhost:3004/usermeals', {
+    Vue.http.post('usermeals', {
       "userId": state.user._id,
       "from": "" + filter.start,
       "to": "" + filter.end
@@ -56,7 +56,7 @@ const actions = {
       time: Date.now(),
       userId: state.user._id
     }
-    return Vue.http.post('http://localhost:3004/data/meal', meal)
+    return Vue.http.post('data/meal', meal)
       .then(res => res.json())
       .then(meal => meal)
   }
