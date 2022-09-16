@@ -12,7 +12,7 @@
     "test": "npm run unit && npm run e2e"
   },
   "dependencies": {
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^3.4.1",
     "bootstrap-vue": "^0.3.6",
     "font-awesome": "^4.7.0",
     "fullcalendar": "^3.1.0",
