@@ -1397,8 +1397,8 @@ css-selector-tokenizer@^0.6.0:
     regexpu-core "^1.0.0"
 
 css-what@2.1:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/css-what/-/css-what-2.1.0.tgz#9467d032c38cfaefb9f2d79501253062f87fa1bd"
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/css-what/-/css-what-2.1.3.tgz#a6d7604573365fe74686c3f311c56513d88285f2"
 
 cssesc@^0.1.0:
   version "0.1.0"
@@ -2071,6 +2071,10 @@ ftp@~0.3.5:
     readable-stream "1.1.x"
     xregexp "2.0.0"
 
+fullcalendar@^3.1.0:
+  version "3.10.5"
+  resolved "https://registry.yarnpkg.com/fullcalendar/-/fullcalendar-3.10.5.tgz#57a3a64d7d744181582bb9e1be32d1846e1db53a"
+
 function-bind@^1.0.2:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.0.tgz#16176714c801798e4e8f2cf7f7529467bb4a5771"
@@ -2712,6 +2716,10 @@ jodid25519@^1.0.0:
   resolved "https://registry.yarnpkg.com/jodid25519/-/jodid25519-1.0.2.tgz#06d4912255093419477d425633606e0e90782967"
   dependencies:
     jsbn "~0.1.0"
+
+jquery@^3.1.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.1.tgz#fab0408f8b45fc19f956205773b62b292c147a16"
 
 js-base64@^2.1.9:
   version "2.1.9"
@@ -3406,6 +3414,10 @@ mocha@^3.1.0:
     lodash.create "3.1.1"
     mkdirp "0.5.1"
     supports-color "3.1.2"
+
+moment@^2.17.1:
+  version "2.29.4"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
 
 ms@0.7.1:
   version "0.7.1"
@@ -4189,6 +4201,10 @@ punycode@^1.2.4, punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
 
+push.js@0.0.11:
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/push.js/-/push.js-0.0.11.tgz#4fad3a9f90844212e2aa67d073a23d470e32a891"
+
 q@^1.1.2:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.4.1.tgz#55705bcd93c5f3673530c2c2cbc0c2b3addc286e"
@@ -4821,6 +4837,10 @@ stable@~0.1.3:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/stable/-/stable-0.1.5.tgz#08232f60c732e9890784b5bed0734f8b32a887b9"
 
+starability@1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/starability/-/starability-1.0.5.tgz#5419145ec7d57dd169db353089acae19cffd05e0"
+
 "statuses@>= 1.3.0 < 2", statuses@~1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.3.0.tgz#8e55758cb20e7682c1f4fce8dcab30bf01d1e07a"
@@ -5190,6 +5210,16 @@ void-elements@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
 
+vue-bulma-rating@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/vue-bulma-rating/-/vue-bulma-rating-1.0.1.tgz#34b25fa29d24249d6074e28db95c47b9d00d2e58"
+  dependencies:
+    starability "1.0.5"
+
+vue-bulma@0.0.35:
+  version "0.0.35"
+  resolved "https://registry.yarnpkg.com/vue-bulma/-/vue-bulma-0.0.35.tgz#5195f35313b50df9f56c9db74afa140ba2b0e24a"
+
 vue-hot-reload-api@^2.0.1:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.0.6.tgz#817d4bfb30f55428aa1012d029499e07f3147d21"
@@ -5236,6 +5266,10 @@ vue-template-compiler@^2.0.4:
 vue-template-es2015-compiler@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.1.1.tgz#ae1ddcf9f6c7eb95df304560ba9a803f3ec9ffb4"
+
+vue-toastr@^2.0.5:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/vue-toastr/-/vue-toastr-2.1.2.tgz#5bcbef8f85f043ca4d411e19e402bb170259527a"
 
 vue@^2.0.1:
   version "2.0.5"
